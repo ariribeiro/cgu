@@ -101,6 +101,17 @@ th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);verti
 th{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);white-space:nowrap}
 td:first-child{font-weight:600;white-space:nowrap}
 
+
+.basics{background:var(--accent-soft);border-radius:12px;padding:12px 16px;margin:4px 0 14px;font-size:.93rem;line-height:1.6}
+.basics>span{display:block;font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
+.gloss-search{width:100%;padding:12px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--text);font:inherit;margin:0 0 14px}
+.gloss-search:focus{outline:2px solid var(--accent);outline-offset:1px}
+.gloss{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:10px}
+.term{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px 16px;font-size:.9rem;line-height:1.55}
+.term b{display:block;font-size:.97rem;margin-bottom:2px}
+.term .tg{font-size:.7rem;color:var(--accent);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.gloss-empty{color:var(--muted);display:none;padding:10px 2px}
+
 /* priority map */
 .map{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
 .map .card{margin:0}
@@ -136,6 +147,7 @@ footer{padding:40px 0 60px;color:var(--muted);font-size:.85rem;border-top:1px so
       <a href="#seg">Segurança &amp; Entrega</a>
       <a href="#p1p2">P1 &amp; P2</a>
       <a href="#discursiva">Discursiva</a>
+      <a href="#glossario">Glossário</a>
     </nav>
     <button class="iconbtn" id="theme" aria-label="Alternar tema" title="Alternar tema">◐</button>
   </div>
@@ -230,6 +242,7 @@ footer{padding:40px 0 60px;color:var(--muted);font-size:.85rem;border-top:1px so
   <article class="card topic" data-p="high" id="t-java">
     <div class="card-h"><h3>Java: orientação a objetos, coleções e exceções</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
     <p class="why">Está literalmente no edital: tipos, controle, classes, encapsulamento, interfaces, herança, polimorfismo, coleções, generics, igualdade, mutabilidade, exceções e arquivos.</p>
+    <div class="basics"><span>📘 Em palavras simples</span>Java é uma linguagem de programação orientada a objetos: o programa é organizado em <b>classes</b> (moldes) e <b>objetos</b> (instâncias desses moldes). Ela roda na <b>JVM</b>, uma máquina virtual que permite o mesmo código funcionar em qualquer sistema. Os <b>4 pilares</b> da OO: encapsulamento (esconder detalhes), herança (reaproveitar), polimorfismo (mesma chamada, comportamentos diferentes) e abstração.</div>
     <div class="cols">
       <div>
         <h3>Fundamentos</h3>
@@ -285,6 +298,7 @@ footer{padding:40px 0 60px;color:var(--muted);font-size:.85rem;border-top:1px so
   <article class="card topic" data-p="high" id="t-conc">
     <div class="card-h"><h3>Concorrência e processamento</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
     <p class="why">Bloco inteiro dedicado no edital (3.1–3.4), com foco em <i>condição de corrida, sincronização, bloqueios e falhas</i>.</p>
+    <div class="basics"><span>📘 Em palavras simples</span>Um programa pode executar várias tarefas ao mesmo tempo, cada uma numa <b>thread</b> (linha de execução). O perigo é quando duas threads mexem no <b>mesmo dado</b> ao mesmo tempo e o resultado depende de quem chegou primeiro. Esse é o problema central deste tópico.</div>
     <ul>
       <li><b>Concorrência</b> (várias tarefas progredindo, intercaladas) × <b>paralelismo</b> (executando ao mesmo tempo em múltiplos núcleos) × <b>assincronia</b> (não bloquear esperando resultado: <code>CompletableFuture</code>, callbacks).</li>
       <li><b>Condição de corrida</b>: resultado depende da ordem de execução. Ex.: <code>count++</code> <b>não é atômico</b> (ler-somar-gravar).</li>
@@ -307,6 +321,7 @@ void inc() { contador.incrementAndGet(); }</code></pre>
   <article class="card topic" data-p="mid" id="t-algo">
     <div class="card-h"><h3>Estruturas de dados, algoritmos, complexidade e padrões de projeto</h3><span class="badge b-mid">MÉDIA</span><label class="chk"><input type="checkbox"> estudado</label></div>
     <p class="why">Cebraspe adora pedir “qual a complexidade” ou “o que esse pseudocódigo imprime”, além de teste de borda.</p>
+    <div class="basics"><span>📘 Em palavras simples</span><b>Algoritmo</b> é a receita passo a passo para resolver um problema; <b>estrutura de dados</b> é a forma de guardar os dados (lista, mapa, pilha, árvore). <b>Complexidade</b> (notação O) diz como o custo cresce quando os dados aumentam: O(n) dobra se os dados dobram; O(n²) quadruplica. <b>Padrões de projeto</b> são soluções prontas e nomeadas para problemas de design que se repetem.</div>
     <div class="cols">
       <div>
         <h3>Complexidade</h3>
@@ -336,6 +351,7 @@ void inc() { contador.incrementAndGet(); }</code></pre>
   <article class="card topic" data-p="mid" id="t-vue">
     <div class="card-h"><h3>JavaScript e Vue.js</h3><span class="badge b-mid">MÉDIA</span><label class="chk"><input type="checkbox"> estudado</label></div>
     <p class="why">Item 4.5 do edital: componentes, reatividade, eventos e consumo de APIs.</p>
+    <div class="basics"><span>📘 Em palavras simples</span><b>Front-end</b> é a parte que o usuário vê no navegador. <b>JavaScript</b> é a linguagem do navegador; <b>Vue.js</b> é um framework que monta a tela a partir de <b>componentes</b> (peças reutilizáveis) e <b>atualiza a tela sozinho</b> quando os dados mudam (reatividade).</div>
     <ul>
       <li><b>Componentes</b>: reaproveitamento; <b>props descem, eventos sobem</b> (<code>emit</code>); não mutar prop no filho.</li>
       <li><b>Reatividade</b> (Vue 3): <code>ref</code>/<code>reactive</code>; <code>computed</code> (derivado, com cache) × <code>watch</code> (efeito colateral, ex.: chamar API).</li>
@@ -350,6 +366,7 @@ void inc() { contador.incrementAndGet(); }</code></pre>
   <article class="card topic" data-p="low" id="t-req">
     <div class="card-h"><h3>Requisitos, UX, acessibilidade e manutenção</h3><span class="badge b-low">BAIXA/MÉDIA</span><label class="chk"><input type="checkbox"> estudado</label></div>
     <p class="why">Itens conceituais, geralmente fáceis de acertar se você conhece os termos.</p>
+    <div class="basics"><span>📘 Em palavras simples</span><b>Requisito</b> é o que o sistema precisa fazer (funcional) ou o quão bem precisa fazer (não funcional, como ser rápido e seguro). <b>UX</b> (experiência do usuário) é o quão fácil e agradável é usar. <b>Acessibilidade</b> é permitir que pessoas com deficiência também usem o sistema.</div>
     <div class="cols">
       <div>
         <h3>Requisitos</h3>
@@ -387,6 +404,7 @@ void inc() { contador.incrementAndGet(); }</code></pre>
   <article class="card topic" data-p="high" id="t-spring">
     <div class="card-h"><h3>Spring Framework e Spring Boot</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
     <p class="why">Itens 1.5–1.7: componentes, inversão de controle, injeção de dependências, configuração/autoconfiguração e serviços REST em camadas.</p>
+    <div class="basics"><span>📘 Em palavras simples</span><b>Spring</b> é o framework Java mais usado para sistemas corporativos. <b>Spring Boot</b> é o atalho que configura quase tudo sozinho, para você subir uma aplicação rápido. A ideia-chave é a <b>injeção de dependências</b>: em vez de você criar os objetos de que precisa com <code>new</code>, o Spring cria e <b>entrega pronto</b> para a sua classe.</div>
     <ul>
       <li><b>IoC</b>: o contêiner cria e gerencia os objetos (<i>beans</i>), não o seu código. <b>DI</b> é a forma de entregar as dependências. Preferir <b>injeção por construtor</b> (imutável, testável, falha cedo).</li>
       <li>Estereótipos: <code>@Component</code>, <code>@Service</code>, <code>@Repository</code> (tradução de exceções de persistência), <code>@Controller</code>/<code>@RestController</code>; <code>@Configuration</code> + <code>@Bean</code>.</li>
@@ -414,6 +432,7 @@ class ProcessoController {
   <article class="card topic" data-p="high" id="t-rest">
     <div class="card-h"><h3>Design de APIs REST: contratos, versionamento, idempotência</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
     <p class="why">Itens 2.1 e 3.2 (repetição de requisições e idempotência) aparecem juntos em muita questão.</p>
+    <div class="basics"><span>📘 Em palavras simples</span><b>API</b> é a porta pela qual um sistema conversa com outro. <b>REST</b> é um estilo de API sobre HTTP: cada coisa (processo, usuário) é um <b>recurso</b> com uma URL, e você age sobre ele com verbos (GET lê, POST cria, PUT altera, DELETE apaga). <b>Idempotente</b> significa que repetir a mesma chamada várias vezes dá o mesmo resultado que fazer uma vez.</div>
     <table>
       <tr><th>Verbo</th><th>Uso</th><th>Seguro</th><th>Idempotente</th></tr>
       <tr><td>GET</td><td>Ler</td><td>Sim</td><td>Sim</td></tr>
@@ -435,6 +454,7 @@ class ProcessoController {
   <article class="card topic" data-p="high" id="t-oauth">
     <div class="card-h"><h3>OAuth 2.0, OpenID Connect e tokens</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
     <p class="why">O edital destaca “OAuth 2.0 para autorização e OpenID Connect para autenticação federada”. A confusão entre os dois é pegadinha certa.</p>
+    <div class="basics"><span>📘 Em palavras simples</span>Imagine um app pedindo acesso às suas fotos do Google <b>sem você dar a senha</b>: isso é <b>OAuth 2.0</b> (o Google entrega ao app um <b>token</b>, uma chave com permissão limitada). <b>OpenID Connect</b> é o complemento que responde “<b>quem é</b> este usuário?” (é o “Entrar com Google”). <b>JWT</b> é o formato mais comum desse token.</div>
     <div class="cols">
       <div>
         <h3>Quem faz o quê</h3>
@@ -475,6 +495,7 @@ class ProcessoController {
   <article class="card topic" data-p="high" id="t-secspring">
     <div class="card-h"><h3>Spring Security e controle de acesso</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
     <p class="why">Itens 2.5–2.8: segregação de funções, configuração, proteção de endpoints e métodos, e <b>identificar/corrigir permissões excessivas</b> (leitura de código esperada).</p>
+    <div class="basics"><span>📘 Em palavras simples</span><b>Autenticação</b> = provar quem você é (login). <b>Autorização</b> = o que você tem permissão de fazer. <b>Spring Security</b> é o módulo do Spring que cuida disso: ele intercepta cada requisição e decide se ela passa. Principal erro a evitar: liberar mais acesso do que o necessário.</div>
     <ul>
       <li><b>Autenticação</b> (quem é) × <b>autorização</b> (o que pode). Fluxo: cadeia de filtros (<code>SecurityFilterChain</code>) → <code>AuthenticationManager</code> → <code>SecurityContext</code>.</li>
       <li>Proteção <b>por URL</b> (<code>requestMatchers(...).hasRole(...)</code>) e <b>por método</b> (<code>@EnableMethodSecurity</code>, <code>@PreAuthorize("hasRole('AUDITOR')")</code>). Proteja <b>ambos</b> quando sensível, porque a URL sozinha falha se o método for chamado por outro caminho.</li>
@@ -496,6 +517,7 @@ class ProcessoController {
   <article class="card topic" data-p="mid" id="t-arch">
     <div class="card-h"><h3>Estilos de arquitetura</h3><span class="badge b-mid">MÉDIA</span><label class="chk"><input type="checkbox"> estudado</label></div>
     <p class="why">Esperam julgamento de <i>trade-off</i>: “qual arquitetura para esse cenário?”.</p>
+    <div class="basics"><span>📘 Em palavras simples</span><b>Arquitetura</b> é como o sistema é dividido em partes. <b>Monolito</b> = tudo num bloco só. <b>Microsserviços</b> = vários serviços pequenos e independentes que conversam por rede. <b>Orientada a eventos</b> = as partes reagem a avisos (“pedido criado”) em vez de se chamarem diretamente. Nenhum é “o melhor”: depende do contexto.</div>
     <table>
       <tr><th>Estilo</th><th>Vantagens</th><th>Custos / quando evitar</th></tr>
       <tr><td>Monolito</td><td>Simples de desenvolver, testar, implantar; transação única; baixa latência interna</td><td>Escala tudo junto, acoplamento cresce, deploy grande</td></tr>
@@ -512,6 +534,7 @@ class ProcessoController {
   <article class="card topic" data-p="mid" id="t-msg">
     <div class="card-h"><h3>Mensageria, consistência e integração</h3><span class="badge b-mid">MÉDIA</span><label class="chk"><input type="checkbox"> estudado</label></div>
     <p class="why">Itens 3.1–3.4: mensageria, falhas, repetição, idempotência, consistência e evolução de contratos.</p>
+    <div class="basics"><span>📘 Em palavras simples</span><b>Mensageria</b> é um “correio” entre sistemas: um envia uma mensagem para uma <b>fila</b> e outro a lê quando puder (Kafka e RabbitMQ são exemplos). Como mensagens podem chegar <b>duplicadas</b> ou falhar no meio, o sistema precisa ser <b>idempotente</b> e cuidar da <b>consistência</b> dos dados entre as partes.</div>
     <ul>
       <li><b>Fila</b> (um consumidor processa cada mensagem) × <b>tópico/pub-sub</b> (vários assinantes). Kafka (log particionado, retenção), RabbitMQ (broker de filas).</li>
       <li>Garantias: <b>at-most-once</b> (pode perder), <b>at-least-once</b> (pode duplicar; o mais comum), <b>exactly-once</b> (difícil; na prática = at-least-once + consumidor idempotente).</li>
@@ -525,6 +548,7 @@ class ProcessoController {
   <article class="card topic" data-p="mid" id="t-ia">
     <div class="card-h"><h3>Integração com dados e IA (LLM, RAG, agentes)</h3><span class="badge b-mid">MÉDIA/ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
     <p class="why">Tema novo e destacado no edital (4.1–4.5). Como é novidade, é terreno fértil para itens conceituais e de segurança.</p>
+    <div class="basics"><span>📘 Em palavras simples</span><b>LLM</b> (modelo de linguagem, como o ChatGPT/Claude) gera texto a partir de texto. Ele pode “inventar” respostas (alucinação). <b>RAG</b> resolve isso: antes de responder, o sistema <b>busca documentos confiáveis</b> e os entrega ao modelo para ele responder com base neles. <b>Embedding</b> é a transformação de um texto em números que representam seu significado, permitindo buscar por sentido.</div>
     <ul>
       <li><b>Embeddings</b>: vetores que representam significado; textos parecidos ficam próximos (similaridade do cosseno). <b>Busca semântica</b> ≠ busca por palavra-chave (esta é lexical, índice invertido).</li>
       <li><b>RAG</b>: recuperar trechos relevantes (banco vetorial) → colocar no prompt → gerar resposta <b>fundamentada nas fontes</b>. Reduz alucinação, atualiza o conhecimento sem retreinar, permite citar fontes.</li>
@@ -539,6 +563,7 @@ class ProcessoController {
   <article class="card topic" data-p="low" id="t-conf">
     <div class="card-h"><h3>Confiabilidade: contêineres, nuvem, observabilidade e continuidade</h3><span class="badge b-low">MÉDIA/BAIXA</span><label class="chk"><input type="checkbox"> estudado</label></div>
     <p class="why">Item 5 do bloco de arquitetura.</p>
+    <div class="basics"><span>📘 Em palavras simples</span><b>Confiabilidade</b> é o sistema continuar funcionando bem apesar de falhas. <b>Contêiner</b> (Docker) empacota o programa com tudo que ele precisa para rodar igual em qualquer lugar. <b>Observabilidade</b> é conseguir ver o que se passa dentro do sistema por logs, métricas e rastreamento.</div>
     <div class="cols">
       <div>
         <ul>
@@ -566,6 +591,7 @@ class ProcessoController {
   <article class="card topic" data-p="high" id="t-jpa">
     <div class="card-h"><h3>JPA e Spring Data JPA</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
     <p class="why">Itens 1.6–1.9: mapeamento, ciclo de vida, contexto de persistência, consultas, transações, carregamento (<i>lazy/eager</i>) e efeito sobre correção e desempenho.</p>
+    <div class="basics"><span>📘 Em palavras simples</span><b>Banco relacional</b> guarda dados em tabelas; Java trabalha com objetos. <b>JPA</b> é o “tradutor” (ORM) entre os dois: você mexe em objetos Java e ele gera o <b>SQL</b> por você. <b>Hibernate</b> é a implementação mais usada; <b>Spring Data JPA</b> poupa ainda mais código, pois cria consultas só pelo nome do método.</div>
     <div class="cols">
       <div>
         <h3>Mapeamento</h3>
@@ -612,6 +638,7 @@ List&lt;Processo&gt; buscarComItens(@Param("id") Long id);   // evita N+1</code>
   <article class="card topic" data-p="high" id="t-sql">
     <div class="card-h"><h3>SQL e desempenho</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
     <p class="why">Cebraspe cobra SQL com consulta escrita no item. Treine <b>ler a query e prever o resultado</b>.</p>
+    <div class="basics"><span>📘 Em palavras simples</span><b>SQL</b> é a linguagem para consultar e alterar dados em banco relacional. Uma consulta básica: <code>SELECT colunas FROM tabela WHERE condição</code>. <b>JOIN</b> junta tabelas relacionadas. <b>Índice</b> é como o índice de um livro: acelera a busca, mas ocupa espaço e deixa a escrita mais lenta.</div>
     <div class="cols">
       <div>
         <h3>Consultas</h3>
@@ -660,6 +687,7 @@ SELECT * FROM ranking WHERE rn = 1;   -- maior despesa por órgão</code></pre>
   <article class="card topic" data-p="high" id="t-batch">
     <div class="card-h"><h3>Spring Batch</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
     <p class="why">Seis subitens só dele (3.6–3.9). É raro um edital detalhar tanto uma biblioteca; espere perguntas conceituais sobre reinício e reprocessamento.</p>
+    <div class="basics"><span>📘 Em palavras simples</span><b>Processamento em lote (batch)</b> é processar um grande volume de dados de uma vez, normalmente sem interação do usuário (ex.: importar 1 milhão de registros de madrugada). <b>Spring Batch</b> organiza isso em <b>Jobs</b> divididos em <b>Steps</b>, com controle de falhas, para <b>retomar de onde parou</b> sem perder nem duplicar dados.</div>
     <div class="cols">
       <div>
         <h3>Estrutura</h3>
@@ -689,6 +717,7 @@ SELECT * FROM ranking WHERE rn = 1;   -- maior despesa por órgão</code></pre>
   <article class="card topic" data-p="high" id="t-priv">
     <div class="card-h"><h3>Privacidade e segurança de dados (LGPD)</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
     <p class="why">Item 4 do bloco, repetido em transparência (complementares). Pergunta típica: “qual técnica/princípio se aplica aqui?”.</p>
+    <div class="basics"><span>📘 Em palavras simples</span><b>LGPD</b> (Lei 13.709/2018) é a lei brasileira de proteção de dados pessoais. A lógica: só coletar o <b>necessário</b>, usar para a <b>finalidade</b> informada, proteger e descartar quando não for mais preciso. <b>Dado pessoal</b> é tudo que identifica uma pessoa (nome, CPF, e-mail).</div>
     <ul>
       <li><b>Princípios (Lei 13.709/2018, art. 6º)</b>: finalidade, adequação, <b>necessidade (minimização)</b>, livre acesso, qualidade, transparência, <b>segurança</b>, prevenção, não discriminação, responsabilização.</li>
       <li><b>Dado pessoal</b> (identifica ou pode identificar) × <b>sensível</b> (saúde, origem racial, religião, opinião política, biometria, vida sexual etc.) × <b>anonimizado</b> (não identifica; <b>fora</b> da LGPD se irreversível).</li>
@@ -705,6 +734,7 @@ SELECT * FROM ranking WHERE rn = 1;   -- maior despesa por órgão</code></pre>
   <article class="card topic" data-p="mid" id="t-etl">
     <div class="card-h"><h3>Fluxos de dados, ETL/ELT e formatos</h3><span class="badge b-mid">MÉDIA</span><label class="chk"><input type="checkbox"> estudado</label></div>
     <p class="why">Itens 3.1–3.5: ingestão, transformação, lote × fluxo, completo × incremental, formatos e repetição segura.</p>
+    <div class="basics"><span>📘 Em palavras simples</span><b>ETL</b> é o processo de pegar dados de várias fontes (<b>E</b>xtrair), ajustá-los (<b>T</b>ransformar) e guardá-los num destino, como um banco para análise (<b>L</b>oad/Carregar). No <b>ELT</b> a ordem muda: carrega primeiro e transforma depois, já no destino.</div>
     <ul>
       <li><b>ETL</b>: transforma <i>antes</i> de carregar (em área de staging). <b>ELT</b>: carrega bruto e transforma <i>dentro</i> do destino (comum em data lake/warehouse na nuvem).</li>
       <li><b>Lote</b> (batch: janelas, alto volume, latência maior) × <b>fluxo</b> (stream: evento a evento, baixa latência).</li>
@@ -718,6 +748,7 @@ SELECT * FROM ranking WHERE rn = 1;   -- maior despesa por órgão</code></pre>
   <article class="card topic" data-p="low" id="t-model">
     <div class="card-h"><h3>Modelagem, NoSQL, cache e busca</h3><span class="badge b-low">MÉDIA/BAIXA</span><label class="chk"><input type="checkbox"> estudado</label></div>
     <p class="why">Item 1 do bloco. Conceitos básicos resolvem a maioria.</p>
+    <div class="basics"><span>📘 Em palavras simples</span><b>Modelar</b> é desenhar como os dados serão organizados. <b>Normalizar</b> é dividir em tabelas para <b>não repetir informação</b>. Além do banco relacional, existem bancos <b>NoSQL</b> (documentos, chave-valor, vetoriais), cada um bom para um tipo de uso. <b>Cache</b> é uma cópia rápida de dados muito usados para não consultar o banco toda hora.</div>
     <ul>
       <li><b>Normalização</b>: 1FN (valores atômicos) → 2FN (sem dependência parcial da chave) → 3FN (sem dependência transitiva). Reduz redundância e anomalias; <b>desnormalizar</b> conscientemente para leitura/desempenho.</li>
       <li><b>Integridade</b>: PK, FK (referencial), UNIQUE, NOT NULL, CHECK.</li>
@@ -737,6 +768,7 @@ SELECT * FROM ranking WHERE rn = 1;   -- maior despesa por órgão</code></pre>
   <article class="card topic" data-p="high" id="t-owasp">
     <div class="card-h"><h3>Segurança de aplicações (OWASP)</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
     <p class="why">Ameaças, validação de entrada, controle de acesso, segredos, dependências, testes autorizados, vazamentos e tratamento de falhas (inclusive com IA).</p>
+    <div class="basics"><span>📘 Em palavras simples</span><b>OWASP</b> (<i>Open Worldwide Application Security Project</i>) é uma fundação sem fins lucrativos que publica material aberto sobre segurança de software. Seu produto mais famoso é o <b>OWASP Top 10</b>: a lista dos 10 riscos mais críticos em aplicações web (como injeção de SQL e falhas de controle de acesso). Existem versões também para <b>APIs</b> e para <b>aplicações com IA/LLM</b>. É a referência de “o que pode dar errado e como se proteger”.</div>
     <div class="cols">
       <div>
         <h3>OWASP Top 10 (essencial)</h3>
@@ -772,6 +804,7 @@ SELECT * FROM ranking WHERE rn = 1;   -- maior despesa por órgão</code></pre>
   <article class="card topic" data-p="high" id="t-test">
     <div class="card-h"><h3>Testes e qualidade</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
     <p class="why">Item 2 do bloco, direto e conceitual. Atenção aos “limites das métricas”.</p>
+    <div class="basics"><span>📘 Em palavras simples</span><b>Teste automatizado</b> é código que verifica se outro código funciona, sem alguém clicar na tela. Vai do <b>unitário</b> (testa uma peça isolada) ao <b>de integração</b> (testa as peças juntas) e ao <b>de aceitação</b> (verifica se atende o que o usuário pediu). Eles dão segurança para mudar o sistema sem quebrar o que já funcionava.</div>
     <table>
       <tr><th>Tipo</th><th>O que verifica</th><th>Característica</th></tr>
       <tr><td>Unitário</td><td>Uma unidade isolada (JUnit + Mockito)</td><td>Rápido, muitos, dependências substituídas por <i>mocks/stubs</i></td></tr>
@@ -792,6 +825,7 @@ SELECT * FROM ranking WHERE rn = 1;   -- maior despesa por órgão</code></pre>
   <article class="card topic" data-p="high" id="t-cicd">
     <div class="card-h"><h3>Entrega e operação: CI/CD e DevSecOps</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
     <p class="why">Item 3 do bloco.</p>
+    <div class="basics"><span>📘 Em palavras simples</span><b>CI/CD</b> é a “esteira” automática que pega o código novo, <b>compila, testa</b> e leva até produção. <b>CI</b> (integração contínua) = testar a cada alteração. <b>CD</b> = entregar/implantar de forma contínua. <b>DevSecOps</b> = incluir segurança em todas as etapas dessa esteira, e não só no fim.</div>
     <ul>
       <li><b>Integração contínua (CI)</b>: integrar com frequência no tronco, com build + testes automáticos a cada <i>commit</i>. <b>Entrega contínua</b>: sempre pronto para produção, com <b>aprovação manual</b> para implantar. <b>Implantação contínua</b>: vai para produção <b>automaticamente</b>.</li>
       <li><b>DevSecOps</b>: segurança <b>em todo o ciclo</b> (<i>shift left</i>): SAST, SCA, <i>secret scanning</i>, DAST, varredura de imagens na pipeline.</li>
@@ -807,6 +841,7 @@ SELECT * FROM ranking WHERE rn = 1;   -- maior despesa por órgão</code></pre>
   <article class="card topic" data-p="mid" id="t-agil">
     <div class="card-h"><h3>Gestão de produtos digitais, Scrum, Kanban e governança</h3><span class="badge b-mid">MÉDIA</span><label class="chk"><input type="checkbox"> estudado</label></div>
     <p class="why">Item 4. Conceitos de gestão com o “sabor CGU”: PDTIC, transformação digital e dados abertos.</p>
+    <div class="basics"><span>📘 Em palavras simples</span><b>Métodos ágeis</b> entregam o software em ciclos curtos, recebendo feedback no caminho, em vez de entregar tudo no final. <b>Scrum</b> organiza o trabalho em <b>sprints</b> (ciclos de até 1 mês) com papéis definidos. <b>Kanban</b> é um quadro (A fazer → Fazendo → Feito) que limita quanto trabalho fica em andamento ao mesmo tempo.</div>
     <div class="cols">
       <div>
         <h3>Scrum</h3>
@@ -835,6 +870,7 @@ SELECT * FROM ranking WHERE rn = 1;   -- maior despesa por órgão</code></pre>
   <article class="card topic" data-p="mid" id="t-contrat">
     <div class="card-h"><h3>Contratação e fiscalização de soluções de TI</h3><span class="badge b-mid">MÉDIA</span><label class="chk"><input type="checkbox"> estudado</label></div>
     <p class="why">Item 5: ETP, TR, comparação “fazer × comprar × compartilhar”, custo total, SLA, fiscalização, propriedade intelectual e plano de saída. Como a prova é de <b>auditor</b>, a ótica é de controle.</p>
+    <div class="basics"><span>📘 Em palavras simples</span>Órgão público não compra livremente: segue um processo. Primeiro justifica a necessidade no <b>ETP</b> (estudo técnico), depois descreve o que quer no <b>Termo de Referência</b>, contrata, e então <b>fiscaliza</b> se o fornecedor entregou o combinado antes de pagar. A ótica do auditor é checar se cada etapa foi bem feita e documentada.</div>
     <ul>
       <li><b>Sequência</b>: necessidade → <b>ETP (Estudo Técnico Preliminar)</b> (justifica a necessidade, compara alternativas, estima custo, avalia viabilidade) → <b>Termo de Referência</b> (especifica o objeto, requisitos, critérios de aceite, SLA, obrigações) → licitação → contrato → <b>fiscalização</b> → pagamento.</li>
       <li><b>Alternativas</b>: desenvolvimento próprio × contratação (fábrica de software, serviço) × <b>compartilhamento</b> (reuso de solução de outro órgão, software público). Considerar capacidade da equipe, custo de manutenção, risco, prazo, <b>dependência</b>.</li>
@@ -908,6 +944,15 @@ SELECT * FROM ranking WHERE rn = 1;   -- maior despesa por órgão</code></pre>
       <li>Vazamento de dado pessoal: minimização, pseudonimização, retenção, resposta a incidente.</li>
     </ul>
   </div>
+</section>
+
+<!-- ============ GLOSSÁRIO ============ -->
+<section id="glossario">
+  <h2><span class="n">09</span>Glossário: o básico explicado</h2>
+  <p class="sub">Termos que aparecem na página e na prova, em linguagem simples. Use a busca.</p>
+  <input class="gloss-search" id="gs" type="search" placeholder="Buscar termo (ex.: token, índice, idempotente)…" aria-label="Buscar no glossário">
+  <div class="gloss" id="gloss"></div>
+  <p class="gloss-empty" id="gempty">Nenhum termo encontrado.</p>
 </section>
 
 </main>
@@ -990,6 +1035,16 @@ SELECT * FROM ranking WHERE rn = 1;   -- maior despesa por órgão</code></pre>
     },{rootMargin:"-30% 0px -60% 0px"});
     secs.forEach(function(s){if(s)io.observe(s);});
   }
+
+  /* glossário */
+  var T=[["API", "Geral", "Interface pela qual um programa pede coisas a outro (dados ou ações) seguindo regras combinadas."], ["REST", "Arquitetura", "Estilo de API sobre HTTP em que tudo é um recurso com URL e as ações são verbos (GET, POST, PUT, DELETE)."], ["HTTP / status code", "Arquitetura", "Protocolo da web. O código de resposta resume o resultado: 2xx deu certo, 4xx erro do cliente, 5xx erro do servidor."], ["Idempotência", "Arquitetura", "Repetir a mesma operação várias vezes tem o mesmo efeito que fazer uma só (ex.: cancelar um pedido já cancelado)."], ["Token", "Segurança", "“Chave” digital temporária que prova quem você é ou o que pode fazer, sem reenviar a senha."], ["JWT", "Segurança", "Formato de token com 3 partes (cabeçalho, dados, assinatura). É assinado, mas o conteúdo é legível, então nada de dado sensível dentro."], ["OAuth 2.0", "Segurança", "Protocolo para autorizar um app a acessar seus dados em outro serviço sem entregar a senha."], ["OpenID Connect (OIDC)", "Segurança", "Camada sobre o OAuth que também confirma a identidade do usuário (“Entrar com…”)."], ["Autenticação × Autorização", "Segurança", "Autenticação: quem é você. Autorização: o que você pode fazer."], ["OWASP", "Segurança", "Fundação que publica referências abertas de segurança, como o Top 10 dos riscos mais críticos em aplicações web."], ["SQL Injection", "Segurança", "Ataque em que o invasor coloca comando SQL na entrada de um formulário. Defesa: consultas parametrizadas."], ["XSS", "Segurança", "Ataque que injeta JavaScript malicioso numa página que outros usuários vão abrir. Defesa: codificar a saída."], ["CSRF", "Segurança", "Ataque que faz o navegador logado da vítima enviar uma ação sem ela saber. Defesa: token anti-CSRF e cookies SameSite."], ["IDOR", "Segurança", "Acessar dado de outro usuário só trocando o ID na requisição (ex.: /pedido/124). É falha de controle de acesso."], ["Criptografia", "Segurança", "Embaralhar dados para só quem tem a chave ler. Em trânsito (TLS/HTTPS) e em repouso (disco, banco)."], ["Hash", "Segurança", "“Impressão digital” irreversível de um dado. Para senhas, use hash lento com salt (BCrypt, Argon2)."], ["Pseudonimização × Anonimização", "Privacidade", "Pseudonimizar troca identificadores por códigos (ainda dá para reidentificar com a chave). Anonimizar é irreversível."], ["LGPD", "Privacidade", "Lei 13.709/2018, que protege dados pessoais: finalidade, necessidade, segurança, transparência."], ["Dado pessoal sensível", "Privacidade", "Dado de maior risco de discriminação: saúde, raça, religião, política, biometria, vida sexual."], ["Minimização", "Privacidade", "Coletar e guardar só o estritamente necessário para a finalidade."], ["Privacy by design", "Privacidade", "Pensar em privacidade desde o projeto do sistema, e não remendar depois."], ["Spring Boot", "Java", "Framework Java que configura quase tudo sozinho para subir uma aplicação rapidamente."], ["Injeção de dependências", "Java", "O framework cria e entrega as dependências que a classe precisa, em vez de ela mesma dar new."], ["Bean", "Java", "Objeto criado e gerenciado pelo contêiner do Spring."], ["JVM", "Java", "Máquina virtual que executa o código Java compilado em qualquer sistema operacional."], ["Thread", "Java", "Linha de execução. Um programa pode ter várias rodando ao mesmo tempo."], ["Race condition", "Java", "Resultado errado porque duas threads mexem no mesmo dado ao mesmo tempo e a ordem importa."], ["Deadlock", "Java", "Duas threads esperando uma pela outra para sempre, cada uma segurando um recurso de que a outra precisa."], ["Checked × unchecked", "Java", "Checked: o compilador obriga a tratar (IOException). Unchecked: não obriga (RuntimeException)."], ["Generics", "Java", "Permite classes e métodos com tipo parametrizado (List<String>), dando segurança de tipos."], ["JPA / ORM", "Dados", "Tradutor entre objetos Java e tabelas do banco: você mexe em objetos e ele gera o SQL."], ["Lazy × Eager", "Dados", "Lazy carrega a associação só quando usada; Eager carrega junto com a entidade."], ["Problema N+1", "Dados", "1 consulta para a lista e mais N (uma por item) para os relacionados: lentidão. Corrige-se com join fetch."], ["Transação / ACID", "Dados", "Conjunto de operações que ou acontecem todas ou nenhuma. ACID: Atomicidade, Consistência, Isolamento, Durabilidade."], ["Índice", "Dados", "Estrutura que acelera buscas no banco, ao custo de espaço e escritas mais lentas."], ["JOIN", "Dados", "Junção de linhas de duas tabelas relacionadas por uma coluna em comum."], ["Normalização", "Dados", "Organizar tabelas para eliminar repetição e anomalias de dados."], ["NoSQL", "Dados", "Bancos que não seguem o modelo relacional: documentos, chave-valor, grafos, vetoriais."], ["ETL / ELT", "Dados", "Extrair, Transformar e Carregar dados (no ELT, transforma depois de carregar)."], ["Batch × Stream", "Dados", "Batch processa grandes blocos de dados de tempos em tempos; stream processa evento a evento, em tempo real."], ["Parquet", "Dados", "Formato de arquivo colunar e comprimido, muito eficiente para análise de dados."], ["Spring Batch", "Dados", "Framework para processamentos em lote, com Jobs, Steps, controle de falhas e reinício."], ["CDC", "Dados", "Change Data Capture: capturar só o que mudou no banco para propagar a outros sistemas."], ["Monolito", "Arquitetura", "Aplicação única, com todas as funções juntas num só pacote."], ["Microsserviços", "Arquitetura", "Aplicação dividida em serviços pequenos, independentes e implantáveis separadamente."], ["Mensageria / fila", "Arquitetura", "Sistema que guarda mensagens enviadas por um serviço até outro as consumir (Kafka, RabbitMQ)."], ["Outbox", "Arquitetura", "Padrão que grava o evento junto com o dado na mesma transação para nunca publicar sem salvar (ou o contrário)."], ["Saga", "Arquitetura", "Sequência de transações locais com passos de compensação se algo falhar no meio."], ["Consistência eventual", "Arquitetura", "Os dados em sistemas diferentes ficam iguais depois de um tempo, não instantaneamente."], ["Circuit breaker", "Arquitetura", "“Disjuntor” que para de chamar um serviço que está falhando, para não piorar a situação."], ["Contêiner / Docker", "Operação", "Pacote que traz o programa e tudo de que ele precisa, rodando isolado e igual em qualquer máquina."], ["Serverless", "Operação", "Você só envia o código; a nuvem cuida dos servidores e cobra por uso."], ["Observabilidade", "Operação", "Entender o que acontece no sistema por logs (eventos), métricas (números) e traces (caminho da requisição)."], ["RTO / RPO", "Operação", "RTO: quanto tempo se aceita ficar fora do ar. RPO: quanto de dado se aceita perder."], ["CI/CD", "Operação", "Esteira automática que integra, testa e entrega o código a cada alteração."], ["DevSecOps", "Operação", "Segurança incluída em todas as etapas do desenvolvimento e da entrega."], ["Rollback", "Operação", "Voltar para a versão anterior quando uma entrega dá problema."], ["Blue-green / Canary", "Operação", "Estratégias de implantação: dois ambientes alternados, ou liberar para uma pequena parcela de usuários primeiro."], ["SAST / DAST / SCA", "Segurança", "SAST analisa o código-fonte; DAST testa a aplicação rodando; SCA vigia vulnerabilidades em dependências."], ["SBOM", "Segurança", "Lista de todos os componentes e bibliotecas de um software, como uma “lista de ingredientes”."], ["Teste unitário × integração", "Qualidade", "Unitário: uma peça isolada. Integração: várias peças funcionando juntas."], ["Mock", "Qualidade", "Objeto falso usado no teste para simular uma dependência real (como um banco ou API)."], ["Cobertura de testes", "Qualidade", "% do código executado pelos testes. Não garante que os testes verifiquem o comportamento correto."], ["Débito técnico", "Qualidade", "Atalhos no código que economizam tempo agora mas geram custo e problemas depois."], ["Scrum", "Gestão", "Método ágil com sprints, papéis (PO, Scrum Master, Devs) e eventos fixos."], ["Kanban", "Gestão", "Quadro visual do fluxo de trabalho que limita o que fica em andamento (WIP)."], ["Product Owner", "Gestão", "Responsável por priorizar o backlog e maximizar o valor do produto."], ["Definition of Done", "Gestão", "Critério comum que diz quando um item está realmente “pronto”."], ["PDTIC", "Gestão", "Plano Diretor de TIC: planejamento de TI do órgão alinhado à estratégia institucional."], ["ETP / Termo de Referência", "Contratação", "ETP: estudo que justifica e avalia a contratação. TR: documento que especifica o que será contratado."], ["SLA / ANS", "Contratação", "Acordo de nível de serviço: metas mensuráveis do fornecedor (disponibilidade, prazo), com penalidade se falhar."], ["TCO", "Contratação", "Custo total de propriedade: tudo o que a solução custa ao longo da vida, não só a compra."], ["Lock-in", "Contratação", "Dependência de um fornecedor ou tecnologia tão grande que trocar fica caro ou inviável."], ["LLM", "IA", "Modelo de linguagem treinado em muito texto, capaz de gerar e resumir texto (ex.: ChatGPT, Claude)."], ["Alucinação", "IA", "Quando o modelo gera uma resposta convincente, mas falsa ou não sustentada por fontes."], ["Embedding", "IA", "Representação de um texto como lista de números que captura o significado, usada para buscar por similaridade."], ["RAG", "IA", "Buscar documentos relevantes antes e entregá-los ao modelo para responder com base neles."], ["Prompt injection", "IA", "Instruções maliciosas escondidas em conteúdo que o modelo lê, tentando fazê-lo agir contra o usuário."], ["Agente de IA", "IA", "Modelo que decide usar ferramentas (APIs, buscas) para cumprir uma tarefa."], ["Vue.js", "Front-end", "Framework JavaScript para montar interfaces com componentes e reatividade."], ["Reatividade", "Front-end", "A tela se atualiza automaticamente quando os dados que ela mostra mudam."], ["WCAG / eMAG", "Front-end", "Diretrizes de acessibilidade web (WCAG internacional; eMAG do governo brasileiro)."], ["Três linhas", "Governança", "Modelo: 1ª linha gere os riscos, 2ª linha supervisiona e apoia, 3ª linha (auditoria interna) avalia de forma independente."], ["LAI", "Governança", "Lei de Acesso à Informação (12.527/2011): publicidade é a regra e sigilo, a exceção."]], G=document.getElementById("gloss"), E=document.getElementById("gempty");
+  function esc(x){return x.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+  G.innerHTML=T.map(function(t){return '<div class="term" data-k="'+esc((t[0]+" "+t[1]+" "+t[2]).toLowerCase())+'"><span class="tg">'+esc(t[1])+'</span><b>'+esc(t[0])+'</b>'+esc(t[2])+'</div>';}).join("");
+  document.getElementById("gs").addEventListener("input",function(){
+    var q=this.value.trim().toLowerCase(), n=0;
+    [].forEach.call(G.children,function(c){var ok=!q||c.dataset.k.indexOf(q)>-1;c.style.display=ok?"":"none";if(ok)n++;});
+    E.style.display=n?"none":"block";
+  });
   paint();
 })();
 </script>
