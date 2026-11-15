@@ -1,0 +1,997 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CGU AFFC · TI Desenvolvimento de Sistemas — Resumo de Estudo</title>
+<meta name="description" content="Resumo priorizado do que mais provavelmente cai na prova do Cargo 4 (AFFC – TI – Desenvolvimento de Sistemas) do concurso CGU 2026, banca Cebraspe.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f8fb; --surface:#ffffff; --surface-2:#f0f2f8; --text:#1c2033; --muted:#5b6280;
+  --line:#e3e6f0; --accent:#4f46e5; --accent-soft:#eceafd;
+  --high:#dc2626; --high-bg:#fdecec; --mid:#b45309; --mid-bg:#fdf3e1; --low:#475569; --low-bg:#eef1f6;
+  --ok:#059669; --ok-bg:#e3f6ee; --warn-bg:#fff8e6; --warn-line:#f2d48a;
+  --code-bg:#f1f3f9; --shadow:0 1px 2px rgba(20,24,60,.05),0 6px 20px rgba(20,24,60,.05);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1020; --surface:#161930; --surface-2:#1d2140; --text:#e8eaf6; --muted:#9aa1c4;
+    --line:#2a2f55; --accent:#8b86ff; --accent-soft:#25285a;
+    --high:#ff8a8a; --high-bg:#3a1c26; --mid:#ffc069; --mid-bg:#3a2d17; --low:#b6bdd6; --low-bg:#23274a;
+    --ok:#4ade9f; --ok-bg:#12332a; --warn-bg:#2f2812; --warn-line:#6b5a22;
+    --code-bg:#1d2140; --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1020; --surface:#161930; --surface-2:#1d2140; --text:#e8eaf6; --muted:#9aa1c4;
+  --line:#2a2f55; --accent:#8b86ff; --accent-soft:#25285a;
+  --high:#ff8a8a; --high-bg:#3a1c26; --mid:#ffc069; --mid-bg:#3a2d17; --low:#b6bdd6; --low-bg:#23274a;
+  --ok:#4ade9f; --ok-bg:#12332a; --warn-bg:#2f2812; --warn-line:#6b5a22;
+  --code-bg:#1d2140; --shadow:none;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+code,pre{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
+code{background:var(--code-bg);padding:.1em .4em;border-radius:6px;font-size:.86em}
+pre{background:var(--code-bg);border:1px solid var(--line);border-radius:12px;padding:14px 16px;overflow-x:auto;font-size:.84rem;line-height:1.55;margin:12px 0}
+pre code{background:none;padding:0;font-size:inherit}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px}
+
+/* top bar */
+.bar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:8px;height:58px}
+.brand{font-weight:800;letter-spacing:-.01em;white-space:nowrap;margin-right:6px}
+.brand span{color:var(--accent)}
+.nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1}
+.nav::-webkit-scrollbar{display:none}
+.nav a{padding:7px 11px;border-radius:999px;font-size:.86rem;font-weight:500;color:var(--muted);text-decoration:none;white-space:nowrap}
+.nav a:hover{background:var(--surface-2);color:var(--text)}
+.nav a.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.iconbtn{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;width:36px;height:36px;cursor:pointer;font-size:1rem;flex:none}
+
+/* hero */
+.hero{padding:48px 0 12px}
+.eyebrow{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:5px 12px;border-radius:999px}
+h1{font-size:clamp(1.9rem,4.6vw,2.9rem);line-height:1.12;letter-spacing:-.025em;margin:16px 0 12px;font-weight:800}
+.lead{color:var(--muted);font-size:1.08rem;max-width:660px;margin:0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:28px 0 8px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
+.stat b{display:block;font-size:1.7rem;letter-spacing:-.02em;line-height:1.1}
+.stat small{color:var(--muted);font-size:.82rem}
+
+/* progress */
+.progress{margin:18px 0 0;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 18px;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow)}
+.progress .track{flex:1;height:10px;background:var(--surface-2);border-radius:999px;overflow:hidden}
+.progress .fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),#22c1c3);border-radius:999px;transition:width .35s}
+.progress span{font-size:.88rem;color:var(--muted);white-space:nowrap}
+.progress button{border:0;background:none;color:var(--muted);font:inherit;font-size:.8rem;text-decoration:underline;cursor:pointer}
+
+/* sections */
+section{padding:44px 0 4px}
+h2{font-size:1.65rem;letter-spacing:-.02em;margin:0 0 6px;font-weight:800}
+h2 .n{color:var(--accent);margin-right:8px}
+.sub{color:var(--muted);margin:0 0 22px}
+h3{font-size:1.08rem;margin:22px 0 8px;letter-spacing:-.01em}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin:0 0 16px;box-shadow:var(--shadow)}
+.card.done{border-color:var(--ok);background:linear-gradient(0deg,var(--ok-bg),var(--surface) 70%)}
+.card-h{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.card-h h3{margin:0;flex:1;min-width:200px;font-size:1.18rem}
+.badge{font-size:.74rem;font-weight:700;padding:4px 10px;border-radius:999px;white-space:nowrap;letter-spacing:.02em}
+.b-high{background:var(--high-bg);color:var(--high)}
+.b-mid{background:var(--mid-bg);color:var(--mid)}
+.b-low{background:var(--low-bg);color:var(--low)}
+.chk{display:flex;align-items:center;gap:7px;font-size:.82rem;color:var(--muted);cursor:pointer;user-select:none}
+.chk input{width:18px;height:18px;accent-color:var(--ok);cursor:pointer}
+.why{color:var(--muted);font-size:.92rem;margin:2px 0 12px}
+ul{padding-left:1.15rem;margin:8px 0}
+li{margin:5px 0}
+li::marker{color:var(--accent)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:4px 28px}
+.trap{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:12px;padding:12px 16px;margin:14px 0 4px;font-size:.93rem}
+.trap strong{display:block;margin-bottom:2px}
+.trap ul{margin:4px 0 0}
+table{width:100%;border-collapse:collapse;font-size:.92rem;margin:10px 0;display:block;overflow-x:auto}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);white-space:nowrap}
+td:first-child{font-weight:600;white-space:nowrap}
+
+/* priority map */
+.map{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
+.map .card{margin:0}
+.map h3{margin:0 0 4px;font-size:1rem}
+.map p{margin:0;color:var(--muted);font-size:.9rem}
+.tier{display:flex;align-items:center;gap:8px;font-weight:700;font-size:.82rem;margin-bottom:10px}
+
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+.filters button{border:1px solid var(--line);background:var(--surface);color:var(--text);padding:7px 14px;border-radius:999px;font:inherit;font-size:.85rem;font-weight:500;cursor:pointer}
+.filters button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+
+footer{padding:40px 0 60px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);margin-top:40px}
+.note{font-size:.84rem;color:var(--muted);background:var(--surface-2);border-radius:12px;padding:12px 16px;margin:16px 0}
+@media (max-width:640px){
+  .card{padding:18px 16px}
+  .brand{display:none}
+  .hero{padding-top:30px}
+}
+@media print{.bar,.filters,.progress,.chk{display:none}.card{box-shadow:none;break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <div class="brand">CGU<span>·</span>TI</div>
+    <nav class="nav" id="nav">
+      <a href="#prova">Prova</a>
+      <a href="#prioridades">Prioridades</a>
+      <a href="#eng">Engenharia</a>
+      <a href="#arq">Arquitetura</a>
+      <a href="#dados">Dados</a>
+      <a href="#seg">Segurança &amp; Entrega</a>
+      <a href="#p1p2">P1 &amp; P2</a>
+      <a href="#discursiva">Discursiva</a>
+    </nav>
+    <button class="iconbtn" id="theme" aria-label="Alternar tema" title="Alternar tema">◐</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+<div class="hero">
+  <span class="eyebrow">Edital nº 1 · CGU · AFFC · Cebraspe</span>
+  <h1>Cargo 4 — TI: Desenvolvimento de Sistemas</h1>
+  <p class="lead">Resumo priorizado do que mais provavelmente cai na prova, montado a partir do conteúdo programático do edital. Estude de cima para baixo: o que tem mais peso e mais chance primeiro.</p>
+
+  <div class="stats">
+    <div class="stat"><b id="days">—</b><small>dias para a prova (13/12/2026)</small></div>
+    <div class="stat"><b>90</b><small>itens C/E em Conhecimentos Específicos (P3)</small></div>
+    <div class="stat"><b>180</b><small>de 260 pontos objetivos vêm da P3</small></div>
+    <div class="stat"><b>10</b><small>vagas imediatas · cadastro de 54</small></div>
+  </div>
+
+  <div class="progress" id="progress">
+    <div class="track"><div class="fill" id="fill"></div></div>
+    <span id="ptxt">0 de 0 tópicos estudados</span>
+    <button id="reset">zerar</button>
+  </div>
+</div>
+
+<!-- ============ PROVA ============ -->
+<section id="prova">
+  <h2><span class="n">01</span>Como é a prova</h2>
+  <p class="sub">Estilo Cebraspe: itens CERTO/ERRADO, e um erro anula um acerto.</p>
+
+  <div class="card">
+    <table>
+      <tr><th>Prova</th><th>Conteúdo</th><th>Itens</th><th>Valor do item</th><th>Mínimo para não ser eliminado</th></tr>
+      <tr><td>P1</td><td>Conhecimentos básicos</td><td>40</td><td>±1,0</td><td>8 pontos</td></tr>
+      <tr><td>P2</td><td>Conhecimentos complementares</td><td>40</td><td>±1,0</td><td>12 pontos</td></tr>
+      <tr><td>P3</td><td><b>Conhecimentos específicos (TI – Dev. de Sistemas)</b></td><td>90</td><td>±2,0</td><td><b>54 pontos</b></td></tr>
+      <tr><td>P4</td><td>Discursiva: 1 questão de complementares (30 linhas, 30 pts) + 1 situação-problema específica (60 linhas, 70 pts)</td><td>2</td><td>100 pts</td><td>50 pontos</td></tr>
+    </table>
+    <ul>
+      <li>Objetivas somadas: mínimo de <b>78 pontos</b> (NP1+NP2+NP3) e cada mínimo acima, ao mesmo tempo.</li>
+      <li>Objetivas e discursiva no mesmo dia (<b>13/12/2026</b>): objetivas de manhã (5 h), discursiva à tarde (3 h 30).</li>
+      <li>Só corrigem a discursiva de quem ficar entre os <b>36 melhores</b> por modalidade (ampla, PcD, PP, PI, PQ).</li>
+      <li>Nota final: <code>NFC = NFPO/26 + NFPD/10</code>. A discursiva pesa o mesmo que todas as objetivas juntas (cada uma vale até 10).</li>
+    </ul>
+    <div class="trap">
+      <strong>Estratégia de marcação</strong>
+      Como errar custa o mesmo que acertar (+2 / −2 na P3), só vale marcar quando a confiança passa de uns 50%. Na dúvida real, deixe em branco. Cada item pode misturar vários objetos de avaliação e testa <i>aplicação e análise</i>, não só decoreba.
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRIORIDADES ============ -->
+<section id="prioridades">
+  <h2><span class="n">02</span>Mapa de prioridades</h2>
+  <p class="sub">Critério: tecnologias nomeadas literalmente no edital (a banca não cita Spring Batch ou Vue.js por acaso), clássicos da banca e tópicos novos que o edital destacou.</p>
+
+  <div class="map">
+    <div class="card">
+      <div class="tier"><span class="badge b-high">PRIORIDADE ALTA</span></div>
+      <h3>Estude primeiro</h3>
+      <p>Java OO + coleções + exceções · concorrência · Spring Boot/DI · REST · OAuth2/OIDC · Spring Security · JPA (lazy, contexto de persistência, transações) · SQL e índices · Spring Batch · LGPD/privacidade · OWASP/segurança · testes · CI/CD/DevSecOps.</p>
+    </div>
+    <div class="card">
+      <div class="tier"><span class="badge b-mid">PRIORIDADE MÉDIA</span></div>
+      <h3>Reforce depois</h3>
+      <p>Arquiteturas (monolito/micro/eventos) · mensageria e idempotência · IA/RAG e prompt injection · ETL/ELT e formatos · Vue.js · Scrum/Kanban · contratação e fiscalização de soluções de TI · padrões de projeto · complexidade.</p>
+    </div>
+    <div class="card">
+      <div class="tier"><span class="badge b-low">PRIORIDADE BAIXA</span></div>
+      <h3>Passe uma vez</h3>
+      <p>Requisitos e UX (conceitos) · acessibilidade · modernização de legados · observabilidade · bancos NoSQL/cache/busca textual · PDTIC e dados abertos (conceitos).</p>
+    </div>
+  </div>
+
+  <p class="note">A prioridade é uma <b>estimativa</b> minha com base no texto do edital e no estilo Cebraspe, e não uma lista oficial. Marque “estudado” em cada card para acompanhar o progresso (fica salvo no seu navegador).</p>
+
+  <div class="filters" id="filters">
+    <button class="on" data-f="all">Todos</button>
+    <button data-f="high">🔥 Só alta</button>
+    <button data-f="mid">Média</button>
+    <button data-f="low">Baixa</button>
+    <button data-f="todo">Pendentes</button>
+  </div>
+</section>
+
+<!-- ============ ENGENHARIA ============ -->
+<section id="eng">
+  <h2><span class="n">03</span>Engenharia de Software e Programação</h2>
+  <p class="sub">Java é o centro. Esperar itens com trecho de código para você analisar.</p>
+
+  <article class="card topic" data-p="high" id="t-java">
+    <div class="card-h"><h3>Java: orientação a objetos, coleções e exceções</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
+    <p class="why">Está literalmente no edital: tipos, controle, classes, encapsulamento, interfaces, herança, polimorfismo, coleções, generics, igualdade, mutabilidade, exceções e arquivos.</p>
+    <div class="cols">
+      <div>
+        <h3>Fundamentos</h3>
+        <ul>
+          <li><b>Primitivos × wrappers</b>: autoboxing; <code>Integer</code> pode ser <code>null</code> (NPE ao desempacotar).</li>
+          <li><b><code>String</code> é imutável</b>; use <code>StringBuilder</code> em loops.</li>
+          <li><b>Encapsulamento</b>: atributos privados + acesso controlado.</li>
+          <li><b>Interface × classe abstrata</b>: interface permite múltipla implementação e métodos <code>default</code>; abstrata guarda estado e construtor.</li>
+          <li><b>Sobrecarga</b> (mesmo nome, outra assinatura, resolvida na compilação) × <b>sobrescrita</b> (subclasse, resolvida em execução = polimorfismo).</li>
+          <li>Herança simples de classe; <code>super</code>; construtores encadeados; <code>final</code> impede herança/sobrescrita.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Igualdade e mutabilidade</h3>
+        <ul>
+          <li><code>==</code> compara <b>referência</b> (e valor em primitivos); <code>equals()</code> compara <b>conteúdo</b>.</li>
+          <li><b>Contrato</b>: se <code>a.equals(b)</code> então <code>a.hashCode()==b.hashCode()</code>. Sobrescrever só um quebra <code>HashMap</code>/<code>HashSet</code>.</li>
+          <li>Objeto <b>mutável como chave</b> de <code>HashMap</code>: alterar o objeto depois de inserir “perde” a entrada.</li>
+          <li>Imutáveis: <code>String</code>, wrappers, <code>record</code>, <code>List.of()</code> (não aceita <code>null</code> e lança em <code>add</code>).</li>
+          <li>Cópia rasa × profunda.</li>
+        </ul>
+      </div>
+    </div>
+    <h3>Coleções e generics</h3>
+    <ul>
+      <li><b>List</b> (ordem, duplicados: <code>ArrayList</code> acesso O(1), <code>LinkedList</code> inserção nas pontas) · <b>Set</b> (sem duplicados: <code>HashSet</code>, <code>LinkedHashSet</code> mantém inserção, <code>TreeSet</code> ordenado) · <b>Map</b> (<code>HashMap</code> O(1) médio, <code>TreeMap</code> O(log n) ordenado).</li>
+      <li><b>Generics</b>: apagamento de tipo (<i>type erasure</i>), <code>List&lt;Object&gt;</code> não é supertipo de <code>List&lt;String&gt;</code>; curingas <code>? extends T</code> (ler) e <code>? super T</code> (escrever), a regra PECS.</li>
+      <li>Remover durante iteração: <code>ConcurrentModificationException</code> (use <code>Iterator.remove()</code> ou <code>removeIf</code>).</li>
+    </ul>
+    <h3>Exceções e arquivos</h3>
+    <ul>
+      <li><b>Checked</b> (<code>Exception</code>, exige tratar/declarar, ex.: <code>IOException</code>) × <b>unchecked</b> (<code>RuntimeException</code>, <code>Error</code>).</li>
+      <li><code>finally</code> sempre roda (exceto <code>System.exit</code>). <b>try-with-resources</b> fecha <code>AutoCloseable</code> sozinho.</li>
+      <li><code>catch</code> mais específico antes do genérico, senão não compila.</li>
+      <li>Arquivos: <code>Files.readAllLines</code>, <code>BufferedReader</code>, <code>Files.lines</code> (stream, precisa fechar), <code>Path</code>/NIO.</li>
+    </ul>
+<pre><code>try (var in = Files.newBufferedReader(Path.of("dados.csv"))) {
+    String linha;
+    while ((linha = in.readLine()) != null) { /* processa */ }
+} catch (IOException e) {
+    throw new UncheckedIOException(e);   // preserva a causa
+}</code></pre>
+    <div class="trap"><strong>Pegadinhas clássicas</strong>
+      <ul>
+        <li>“<code>==</code> em <code>String</code> compara conteúdo” → ERRADO (depende do <i>string pool</i>).</li>
+        <li>“Sobrescrever <code>equals</code> dispensa <code>hashCode</code>” → ERRADO.</li>
+        <li>“Todas as exceções precisam ser tratadas” → ERRADO (só as checked).</li>
+        <li>Polimorfismo: o método chamado depende do tipo <b>real</b> do objeto, não do tipo da variável (atributos e métodos estáticos não são polimórficos).</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="card topic" data-p="high" id="t-conc">
+    <div class="card-h"><h3>Concorrência e processamento</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
+    <p class="why">Bloco inteiro dedicado no edital (3.1–3.4), com foco em <i>condição de corrida, sincronização, bloqueios e falhas</i>.</p>
+    <ul>
+      <li><b>Concorrência</b> (várias tarefas progredindo, intercaladas) × <b>paralelismo</b> (executando ao mesmo tempo em múltiplos núcleos) × <b>assincronia</b> (não bloquear esperando resultado: <code>CompletableFuture</code>, callbacks).</li>
+      <li><b>Condição de corrida</b>: resultado depende da ordem de execução. Ex.: <code>count++</code> <b>não é atômico</b> (ler-somar-gravar).</li>
+      <li><code>synchronized</code>: exclusão mútua + visibilidade. <code>volatile</code>: garante <b>visibilidade e ordem</b>, mas <b>não atomicidade</b>.</li>
+      <li><code>AtomicInteger</code>/CAS, <code>ReentrantLock</code>, <code>ConcurrentHashMap</code> (não bloqueia o mapa todo), <code>CopyOnWriteArrayList</code>.</li>
+      <li><b>Deadlock</b>: locks em ordem diferente; prevenção = ordem global de aquisição, timeout (<code>tryLock</code>), escopo mínimo. Também <i>livelock</i> e <i>starvation</i>.</li>
+      <li><code>ExecutorService</code>/pools: reaproveitam threads; pool pequeno limita paralelismo, bloqueio dentro de pool pode esgotá-lo.</li>
+      <li>Estado compartilhado mutável é a raiz do problema; mitigar com <b>imutabilidade</b>, confinamento a uma thread, ou estado externo (banco) com controle de concorrência.</li>
+      <li>Em requisições concorrentes (ex.: <code>@Service</code> singleton do Spring): <b>não guardar estado mutável em atributo do bean</b>.</li>
+    </ul>
+<pre><code>// ERRADO: dois threads podem ler o mesmo valor
+private int contador = 0;
+void inc() { contador++; }
+
+// CERTO
+private final AtomicInteger contador = new AtomicInteger();
+void inc() { contador.incrementAndGet(); }</code></pre>
+  </article>
+
+  <article class="card topic" data-p="mid" id="t-algo">
+    <div class="card-h"><h3>Estruturas de dados, algoritmos, complexidade e padrões de projeto</h3><span class="badge b-mid">MÉDIA</span><label class="chk"><input type="checkbox"> estudado</label></div>
+    <p class="why">Cebraspe adora pedir “qual a complexidade” ou “o que esse pseudocódigo imprime”, além de teste de borda.</p>
+    <div class="cols">
+      <div>
+        <h3>Complexidade</h3>
+        <ul>
+          <li>O(1) &lt; O(log n) &lt; O(n) &lt; O(n log n) &lt; O(n²) &lt; O(2ⁿ).</li>
+          <li>Busca binária O(log n) <b>exige ordenação</b>. Ordenação por comparação: melhor possível O(n log n) (merge, heap; quick é O(n²) no pior caso).</li>
+          <li><code>HashMap</code> O(1) médio, O(n) pior caso. Pilha (LIFO) × fila (FIFO) × deque.</li>
+          <li>Árvore balanceada O(log n); BFS usa fila, DFS usa pilha/recursão.</li>
+          <li>Loop dentro de loop sobre a mesma coleção: O(n²), e a decisão de desempenho costuma ser trocar por <code>Map</code>/<code>Set</code>.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Testes de borda</h3>
+        <ul>
+          <li>Lista vazia, um elemento, <code>null</code>, limites (<code>off-by-one</code>), números negativos, overflow de <code>int</code>, divisão por zero, datas/fuso.</li>
+          <li>Leia o código “como o compilador”: ordem de avaliação, <code>i++</code> × <code>++i</code>, curto-circuito <code>&amp;&amp;</code>/<code>||</code>.</li>
+        </ul>
+      </div>
+    </div>
+    <h3>Padrões de projeto (como apoio à manutenção)</h3>
+    <ul>
+      <li><b>Strategy</b> (trocar algoritmo sem <code>if/else</code>) · <b>Factory/Builder</b> (criação) · <b>Singleton</b> (instância única; cuidado com estado global e testes) · <b>Observer</b> (eventos) · <b>Decorator</b> · <b>Adapter</b> (compatibilizar interfaces) · <b>Facade</b> · <b>Template Method</b>.</li>
+      <li>Princípios: <b>SOLID</b>, alta <b>coesão</b> e baixo <b>acoplamento</b>, preferir composição a herança, injetar dependências.</li>
+    </ul>
+  </article>
+
+  <article class="card topic" data-p="mid" id="t-vue">
+    <div class="card-h"><h3>JavaScript e Vue.js</h3><span class="badge b-mid">MÉDIA</span><label class="chk"><input type="checkbox"> estudado</label></div>
+    <p class="why">Item 4.5 do edital: componentes, reatividade, eventos e consumo de APIs.</p>
+    <ul>
+      <li><b>Componentes</b>: reaproveitamento; <b>props descem, eventos sobem</b> (<code>emit</code>); não mutar prop no filho.</li>
+      <li><b>Reatividade</b> (Vue 3): <code>ref</code>/<code>reactive</code>; <code>computed</code> (derivado, com cache) × <code>watch</code> (efeito colateral, ex.: chamar API).</li>
+      <li>Diretivas: <code>v-if</code> (monta/desmonta) × <code>v-show</code> (CSS); <code>v-for</code> com <code>:key</code> estável; <code>v-model</code> (two-way); <code>@click</code>, <code>.prevent</code>.</li>
+      <li>Ciclo de vida: <code>onMounted</code> é o lugar típico para a primeira chamada à API.</li>
+      <li><b>Consumo de APIs</b>: <code>fetch</code>/<code>axios</code> são assíncronos (<code>async/await</code>, <code>Promise</code>); tratar loading, erro e vazio; <code>fetch</code> <b>não rejeita em HTTP 4xx/5xx</b> (conferir <code>response.ok</code>).</li>
+      <li>JS: <code>===</code> × <code>==</code>, <code>let/const/var</code>, <i>closures</i>, <i>event loop</i>.</li>
+      <li>Segurança no front: <code>v-html</code> com conteúdo não confiável = <b>XSS</b>; token não deve ficar em <code>localStorage</code> se houver alternativa (cookie <code>HttpOnly</code>).</li>
+    </ul>
+  </article>
+
+  <article class="card topic" data-p="low" id="t-req">
+    <div class="card-h"><h3>Requisitos, UX, acessibilidade e manutenção</h3><span class="badge b-low">BAIXA/MÉDIA</span><label class="chk"><input type="checkbox"> estudado</label></div>
+    <p class="why">Itens conceituais, geralmente fáceis de acertar se você conhece os termos.</p>
+    <div class="cols">
+      <div>
+        <h3>Requisitos</h3>
+        <ul>
+          <li><b>Funcionais</b> (o que o sistema faz) × <b>não funcionais</b> (desempenho, segurança, usabilidade, disponibilidade, acessibilidade).</li>
+          <li><b>Critério de aceitação</b>: verificável e objetivo (“dado… quando… então…”).</li>
+          <li><b>Restrições</b>: legais, orçamentárias, tecnológicas, prazo.</li>
+          <li>Desenho centrado nas pessoas: pesquisa, personas, jornada, prototipação e teste com usuários reais.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>UX e acessibilidade</h3>
+        <ul>
+          <li>Heurísticas de Nielsen: visibilidade do estado, prevenção de erros, consistência, reconhecer em vez de lembrar.</li>
+          <li>Prototipação: baixa × alta fidelidade; <b>validação com usuários antes de codar</b> é mais barato.</li>
+          <li><b>WCAG</b>: perceptível, operável, compreensível, robusto (POUR). No Brasil: <b>eMAG</b>. HTML semântico, alt, contraste, navegação por teclado, leitores de tela (<code>aria-*</code>).</li>
+          <li>Responsivo: <i>mobile first</i>, media queries, unidades relativas.</li>
+        </ul>
+      </div>
+    </div>
+    <h3>Manutenção e evolução</h3>
+    <ul>
+      <li><b>Débito técnico</b>: atalhos que cobram juros (bugs, lentidão); gerenciar com refatoração, testes e documentação.</li>
+      <li><b>Legados</b>: sustentação × modernização; estratégia segura é incremental (<i>Strangler Fig</i>), com testes de caracterização antes de mexer.</li>
+      <li><b>Interoperabilidade</b>: padrões abertos, contratos de API estáveis, compatibilidade retroativa.</li>
+    </ul>
+  </article>
+</section>
+
+<!-- ============ ARQUITETURA ============ -->
+<section id="arq">
+  <h2><span class="n">04</span>Arquitetura e Integração de Sistemas</h2>
+  <p class="sub">Spring Boot, REST, OAuth2/OIDC e Spring Security são pontos explícitos do edital.</p>
+
+  <article class="card topic" data-p="high" id="t-spring">
+    <div class="card-h"><h3>Spring Framework e Spring Boot</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
+    <p class="why">Itens 1.5–1.7: componentes, inversão de controle, injeção de dependências, configuração/autoconfiguração e serviços REST em camadas.</p>
+    <ul>
+      <li><b>IoC</b>: o contêiner cria e gerencia os objetos (<i>beans</i>), não o seu código. <b>DI</b> é a forma de entregar as dependências. Preferir <b>injeção por construtor</b> (imutável, testável, falha cedo).</li>
+      <li>Estereótipos: <code>@Component</code>, <code>@Service</code>, <code>@Repository</code> (tradução de exceções de persistência), <code>@Controller</code>/<code>@RestController</code>; <code>@Configuration</code> + <code>@Bean</code>.</li>
+      <li>Escopo padrão do bean = <b>singleton</b> (um por contêiner), logo, thread-safety importa.</li>
+      <li><code>@SpringBootApplication</code> = <code>@Configuration</code> + <code>@EnableAutoConfiguration</code> + <code>@ComponentScan</code>.</li>
+      <li><b>Autoconfiguração</b>: configura beans conforme o <i>classpath</i> e propriedades (condicionais); <i>starters</i> agrupam dependências; você sobrescreve definindo seu próprio bean.</li>
+      <li><b>Perfis</b> (<code>@Profile</code>, <code>application-prod.yml</code>) e configuração externa (variáveis de ambiente) para separar ambientes. <b>Segredos fora do código.</b></li>
+      <li><b>Camadas</b>: Controller (HTTP) → Service (regra de negócio, <code>@Transactional</code>) → Repository (acesso a dados). Regra de negócio no controller = erro de design. Expor entidade JPA direto na API = acoplamento; use <b>DTO</b>.</li>
+      <li>REST no Spring: <code>@GetMapping</code>, <code>@PathVariable</code>, <code>@RequestBody</code>, <code>@Valid</code> (Bean Validation), <code>@RestControllerAdvice</code> para tratar erros de forma central.</li>
+    </ul>
+<pre><code>@RestController
+@RequestMapping("/api/v1/processos")
+class ProcessoController {
+    private final ProcessoService service;          // injeção por construtor
+    ProcessoController(ProcessoService service) { this.service = service; }
+
+    @PostMapping
+    ResponseEntity&lt;ProcessoDto&gt; criar(@Valid @RequestBody NovoProcessoDto dto) {
+        var criado = service.criar(dto);
+        return ResponseEntity.created(URI.create("/api/v1/processos/" + criado.id())).body(criado);
+    }
+}</code></pre>
+  </article>
+
+  <article class="card topic" data-p="high" id="t-rest">
+    <div class="card-h"><h3>Design de APIs REST: contratos, versionamento, idempotência</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
+    <p class="why">Itens 2.1 e 3.2 (repetição de requisições e idempotência) aparecem juntos em muita questão.</p>
+    <table>
+      <tr><th>Verbo</th><th>Uso</th><th>Seguro</th><th>Idempotente</th></tr>
+      <tr><td>GET</td><td>Ler</td><td>Sim</td><td>Sim</td></tr>
+      <tr><td>POST</td><td>Criar / ação</td><td>Não</td><td><b>Não</b></td></tr>
+      <tr><td>PUT</td><td>Substituir recurso inteiro</td><td>Não</td><td>Sim</td></tr>
+      <tr><td>PATCH</td><td>Alteração parcial</td><td>Não</td><td>Não necessariamente</td></tr>
+      <tr><td>DELETE</td><td>Remover</td><td>Não</td><td>Sim</td></tr>
+    </table>
+    <ul>
+      <li><b>Status</b>: 200 OK, 201 Created (+ <code>Location</code>), 204 No Content, 400 (requisição inválida), <b>401 não autenticado</b>, <b>403 autenticado sem permissão</b>, 404, 409 Conflict, 422, 429 (rate limit), 500, 503.</li>
+      <li>Recursos como <b>substantivos</b> (<code>/processos/42</code>), não verbos; coleções no plural; paginação, filtro e ordenação por query string.</li>
+      <li><b>Versionamento</b>: no caminho (<code>/v1</code>), cabeçalho ou <i>media type</i>. Mudança <b>compatível</b> (adicionar campo opcional) × <b>quebra de contrato</b> (remover/renomear campo, mudar tipo), e esta exige nova versão.</li>
+      <li>Contrato: <b>OpenAPI</b>; testes de contrato evitam quebrar consumidores.</li>
+      <li><b>Repetição segura</b>: cliente reenvia por timeout. Para <code>POST</code>, use <b>chave de idempotência</b> (<code>Idempotency-Key</code>) guardada pelo servidor.</li>
+      <li>Stateless: cada requisição carrega o necessário (facilita escala horizontal).</li>
+    </ul>
+  </article>
+
+  <article class="card topic" data-p="high" id="t-oauth">
+    <div class="card-h"><h3>OAuth 2.0, OpenID Connect e tokens</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
+    <p class="why">O edital destaca “OAuth 2.0 para autorização e OpenID Connect para autenticação federada”. A confusão entre os dois é pegadinha certa.</p>
+    <div class="cols">
+      <div>
+        <h3>Quem faz o quê</h3>
+        <ul>
+          <li><b>OAuth 2.0</b> = <b>autorização delegada</b>: dar acesso limitado a um recurso <i>sem compartilhar a senha</i>. Não autentica por si só.</li>
+          <li><b>OIDC</b> = camada de <b>identidade/autenticação</b> sobre o OAuth 2.0; adiciona o <b>ID Token (JWT)</b>, o endpoint <code>userinfo</code> e o <i>scope</i> <code>openid</code>.</li>
+          <li>Papéis: <i>Resource Owner</i>, <i>Client</i>, <i>Authorization Server</i>, <i>Resource Server</i>.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Tokens</h3>
+        <ul>
+          <li><b>Access token</b>: acessa a API (curta duração). <b>Refresh token</b>: renova o access token (guardar com mais cuidado). <b>ID token</b>: prova <i>quem</i> autenticou, é para o cliente, <b>não</b> para chamar API.</li>
+          <li>JWT = header.payload.signature; <b>assinado, não criptografado</b> (payload é legível, não ponha dado sensível).</li>
+        </ul>
+      </div>
+    </div>
+    <h3>Fluxos</h3>
+    <ul>
+      <li><b>Authorization Code + PKCE</b>: padrão para SPA/mobile e web (PKCE protege contra interceptação do código).</li>
+      <li><b>Client Credentials</b>: máquina a máquina, sem usuário.</li>
+      <li><b>Implicit</b> e <b>Password</b> (ROPC): <b>obsoletos/desaconselhados</b>.</li>
+    </ul>
+    <h3>Validar token no Resource Server</h3>
+    <ul>
+      <li>Assinatura (chave pública/JWKS), <code>iss</code> (emissor), <code>aud</code> (destinatário), <code>exp</code>/<code>nbf</code> (validade), <i>scopes</i>/<i>claims</i> necessários.</li>
+      <li>Tokens curtos, TLS sempre, não registrar token em log, revogação/rotação do refresh token, <code>state</code> e <code>nonce</code> contra CSRF/replay.</li>
+    </ul>
+    <div class="trap"><strong>Pegadinhas</strong>
+      <ul>
+        <li>“OAuth 2.0 é protocolo de autenticação” → ERRADO (é autorização; autenticação é OIDC).</li>
+        <li>“JWT é criptografado, então pode ter CPF” → ERRADO.</li>
+        <li>“Aceitar token só porque a assinatura é válida” → insuficiente: confira <code>aud</code>, <code>iss</code> e expiração.</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="card topic" data-p="high" id="t-secspring">
+    <div class="card-h"><h3>Spring Security e controle de acesso</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
+    <p class="why">Itens 2.5–2.8: segregação de funções, configuração, proteção de endpoints e métodos, e <b>identificar/corrigir permissões excessivas</b> (leitura de código esperada).</p>
+    <ul>
+      <li><b>Autenticação</b> (quem é) × <b>autorização</b> (o que pode). Fluxo: cadeia de filtros (<code>SecurityFilterChain</code>) → <code>AuthenticationManager</code> → <code>SecurityContext</code>.</li>
+      <li>Proteção <b>por URL</b> (<code>requestMatchers(...).hasRole(...)</code>) e <b>por método</b> (<code>@EnableMethodSecurity</code>, <code>@PreAuthorize("hasRole('AUDITOR')")</code>). Proteja <b>ambos</b> quando sensível, porque a URL sozinha falha se o método for chamado por outro caminho.</li>
+      <li><b>Ordem das regras importa</b>: a primeira que casa vale; <code>anyRequest().authenticated()</code> por último. <code>permitAll()</code> amplo demais é a falha típica.</li>
+      <li><b>Negar por padrão</b> (<i>deny by default</i>) e <b>menor privilégio</b>. Cuidado com <code>hasRole("ADMIN")</code> em tudo, curinga <code>/**</code> liberado, e papéis genéricos demais.</li>
+      <li><b>IDOR / BOLA</b> (OWASP nº 1): autorizar só “é usuário logado” sem checar se <b>o recurso é dele</b> (<code>GET /pedidos/123</code>). Solução: checar posse/escopo no serviço (<code>@PreAuthorize</code> com expressão, ou filtro por usuário na query).</li>
+      <li>Senhas: <b>hash adaptativo com salt</b> (<code>BCrypt</code>/<code>Argon2</code> via <code>PasswordEncoder</code>), nunca reversível, nunca MD5/SHA-1 puro.</li>
+      <li><b>CSRF</b>: relevante com sessão/cookie; em API stateless com token no cabeçalho costuma ser desabilitado conscientemente. <b>CORS</b> não é mecanismo de autorização.</li>
+      <li><b>Segregação de funções</b>: quem cria não aprova; papéis e permissões granulares, trilha de auditoria.</li>
+      <li>Resource Server: <code>oauth2ResourceServer(jwt -> ...)</code> valida o JWT por você.</li>
+    </ul>
+<pre><code>http.authorizeHttpRequests(a -> a
+    .requestMatchers("/publico/**").permitAll()
+    .requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
+    .anyRequest().authenticated())          // por último: negar por padrão
+  .oauth2ResourceServer(o -> o.jwt(Customizer.withDefaults()));</code></pre>
+  </article>
+
+  <article class="card topic" data-p="mid" id="t-arch">
+    <div class="card-h"><h3>Estilos de arquitetura</h3><span class="badge b-mid">MÉDIA</span><label class="chk"><input type="checkbox"> estudado</label></div>
+    <p class="why">Esperam julgamento de <i>trade-off</i>: “qual arquitetura para esse cenário?”.</p>
+    <table>
+      <tr><th>Estilo</th><th>Vantagens</th><th>Custos / quando evitar</th></tr>
+      <tr><td>Monolito</td><td>Simples de desenvolver, testar, implantar; transação única; baixa latência interna</td><td>Escala tudo junto, acoplamento cresce, deploy grande</td></tr>
+      <tr><td>Microsserviços</td><td>Deploy e escala independentes, times autônomos, isolamento de falhas, tecnologias distintas</td><td>Complexidade distribuída: rede, consistência eventual, observabilidade, custo operacional. <b>Não use por moda em equipe pequena</b></td></tr>
+      <tr><td>Orientada a eventos</td><td>Baixo acoplamento temporal, reativa, boa para integração e picos</td><td>Difícil de depurar, ordem e duplicidade de mensagens, consistência eventual</td></tr>
+    </table>
+    <ul>
+      <li>Um <b>monolito modular</b> bem organizado costuma ser a resposta sensata para equipe/escopo pequenos.</li>
+      <li>Escolha conforme <b>restrições</b>: equipe, prazo, orçamento, criticidade, volume, requisitos de segurança e custo.</li>
+      <li>Distribuição de responsabilidades: limites de contexto (<i>bounded context</i>), alta coesão, dependências em uma direção.</li>
+    </ul>
+  </article>
+
+  <article class="card topic" data-p="mid" id="t-msg">
+    <div class="card-h"><h3>Mensageria, consistência e integração</h3><span class="badge b-mid">MÉDIA</span><label class="chk"><input type="checkbox"> estudado</label></div>
+    <p class="why">Itens 3.1–3.4: mensageria, falhas, repetição, idempotência, consistência e evolução de contratos.</p>
+    <ul>
+      <li><b>Fila</b> (um consumidor processa cada mensagem) × <b>tópico/pub-sub</b> (vários assinantes). Kafka (log particionado, retenção), RabbitMQ (broker de filas).</li>
+      <li>Garantias: <b>at-most-once</b> (pode perder), <b>at-least-once</b> (pode duplicar; o mais comum), <b>exactly-once</b> (difícil; na prática = at-least-once + consumidor idempotente).</li>
+      <li><b>Consumidor idempotente</b>: guardar ID da mensagem processada ou usar operação naturalmente idempotente. <b>Dead-letter queue</b> para mensagens venenosas; <i>retry</i> com <b>backoff exponencial</b>.</li>
+      <li>Sem transação distribuída (2PC é frágil): <b>Saga</b> (passos locais + compensação) e <b>Outbox</b> (grava evento na mesma transação do dado e publica depois, evita “gravou no banco mas não publicou”).</li>
+      <li><b>Consistência eventual</b>; teorema CAP (sob partição, escolha entre consistência e disponibilidade).</li>
+      <li><b>Evolução de contrato</b>: mudanças aditivas, campos opcionais, versionar schema, consumidores tolerantes; migração de esquema <b>expandir → migrar → contrair</b> (sem derrubar versão antiga).</li>
+    </ul>
+  </article>
+
+  <article class="card topic" data-p="mid" id="t-ia">
+    <div class="card-h"><h3>Integração com dados e IA (LLM, RAG, agentes)</h3><span class="badge b-mid">MÉDIA/ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
+    <p class="why">Tema novo e destacado no edital (4.1–4.5). Como é novidade, é terreno fértil para itens conceituais e de segurança.</p>
+    <ul>
+      <li><b>Embeddings</b>: vetores que representam significado; textos parecidos ficam próximos (similaridade do cosseno). <b>Busca semântica</b> ≠ busca por palavra-chave (esta é lexical, índice invertido).</li>
+      <li><b>RAG</b>: recuperar trechos relevantes (banco vetorial) → colocar no prompt → gerar resposta <b>fundamentada nas fontes</b>. Reduz alucinação, atualiza o conhecimento sem retreinar, permite citar fontes.</li>
+      <li><b>Agentes e ferramentas</b>: o modelo decide chamar funções/APIs (<i>tool calling</i>). Riscos aumentam com o poder das ferramentas.</li>
+      <li><b>Prompt injection (inclusive indireta)</b>: instruções maliciosas escondidas em documentos/páginas/e-mails que o modelo lê. Defesa: tratar conteúdo externo como <b>dado, não instrução</b>; <b>menor privilégio</b> para ferramentas; limitar escopo e permissões; <b>confirmação humana</b> em ações sensíveis; filtrar/validar saída; não dar ao modelo credenciais amplas.</li>
+      <li><b>Autorização na recuperação</b>: filtrar o que o RAG busca pelas permissões do <b>usuário</b> (senão vaza documento que ele não poderia ver).</li>
+      <li><b>Avaliação funcional</b>: conjunto de casos de teste, checar se a resposta está sustentada pela fonte, medir erros e vieses, não só “parece bom”. LLM é <b>não determinístico</b>.</li>
+      <li>Proteção de dados: não enviar dado pessoal/sigiloso a serviço externo sem base legal e salvaguardas; registrar/rastrear uso.</li>
+    </ul>
+  </article>
+
+  <article class="card topic" data-p="low" id="t-conf">
+    <div class="card-h"><h3>Confiabilidade: contêineres, nuvem, observabilidade e continuidade</h3><span class="badge b-low">MÉDIA/BAIXA</span><label class="chk"><input type="checkbox"> estudado</label></div>
+    <p class="why">Item 5 do bloco de arquitetura.</p>
+    <div class="cols">
+      <div>
+        <ul>
+          <li><b>Contêiner</b> (Docker): processo isolado compartilhando o kernel do host, leve e portátil; <b>imagem</b> (modelo imutável) × <b>contêiner</b> (instância em execução). VM tem SO próprio.</li>
+          <li><b>Serverless/FaaS</b>: sem gerenciar servidor, escala a zero, paga por uso; <i>cold start</i>, limites de tempo, difícil estado local.</li>
+          <li>IaaS × PaaS × SaaS. Kubernetes orquestra contêineres (réplicas, <i>health checks</i>, <i>rolling update</i>).</li>
+        </ul>
+      </div>
+      <div>
+        <ul>
+          <li><b>Observabilidade</b>: <b>logs</b> (eventos), <b>métricas</b> (números no tempo), <b>traces</b> (caminho de uma requisição entre serviços; <i>correlation ID</i>).</li>
+          <li>Latência × vazão; disponibilidade (SLA/SLO); <b>tolerância a falhas</b>: <i>timeout</i>, <i>retry</i> com backoff + <i>jitter</i>, <b>circuit breaker</b>, <i>bulkhead</i>, <i>fallback</i>.</li>
+          <li><b>RTO</b> (tempo para voltar) × <b>RPO</b> (quanto dado se aceita perder); backup testado; <b>degradação graciosa</b>.</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ============ DADOS ============ -->
+<section id="dados">
+  <h2><span class="n">05</span>Persistência, Integração e Proteção de Dados</h2>
+  <p class="sub">JPA, SQL, Spring Batch e privacidade: quatro áreas com muita chance de questão.</p>
+
+  <article class="card topic" data-p="high" id="t-jpa">
+    <div class="card-h"><h3>JPA e Spring Data JPA</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
+    <p class="why">Itens 1.6–1.9: mapeamento, ciclo de vida, contexto de persistência, consultas, transações, carregamento (<i>lazy/eager</i>) e efeito sobre correção e desempenho.</p>
+    <div class="cols">
+      <div>
+        <h3>Mapeamento</h3>
+        <ul>
+          <li><code>@Entity</code>, <code>@Id</code>, <code>@GeneratedValue</code>, <code>@Column</code>, <code>@Enumerated(EnumType.STRING)</code> (ORDINAL quebra se reordenar o enum).</li>
+          <li><code>@ManyToOne</code>, <code>@OneToMany</code>, <code>@ManyToMany</code>. O lado <b>dono</b> da relação é o que tem a FK; o outro usa <code>mappedBy</code>.</li>
+          <li><code>cascade</code> propaga operações; <code>orphanRemoval</code> apaga filho removido da coleção.</li>
+          <li><b>Locking otimista</b> com <code>@Version</code> (detecta conflito) × <b>pessimista</b> (bloqueia a linha).</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Ciclo de vida e contexto</h3>
+        <ul>
+          <li>Estados: <b>new/transient</b> → <b>managed</b> → <b>detached</b> → <b>removed</b>.</li>
+          <li><b>Contexto de persistência</b> (<code>EntityManager</code>): cache de 1º nível (mesma entidade = mesmo objeto na transação) e <b><i>dirty checking</i></b>: alterou uma entidade <i>managed</i>, o <i>flush</i> gera o <code>UPDATE</code> sozinho, sem chamar <code>save()</code>.</li>
+          <li><code>persist</code> (nova) × <code>merge</code> (devolve cópia <i>managed</i>).</li>
+        </ul>
+      </div>
+    </div>
+    <h3>Carregamento: o tema que mais cai</h3>
+    <ul>
+      <li><b>LAZY</b> (carrega sob demanda; padrão em <code>*ToMany</code>) × <b>EAGER</b> (carrega junto; padrão em <code>*ToOne</code>).</li>
+      <li><b><code>LazyInitializationException</code></b>: acessar associação LAZY com a sessão/transação já fechada. Soluções: <code>join fetch</code>, <code>@EntityGraph</code>, DTO/projeção, manter a transação aberta no serviço. (<code>open-in-view</code> “resolve” mas é má prática.)</li>
+      <li><b>Problema N+1</b>: 1 consulta para a lista + N consultas para a associação de cada item → desempenho horrível. Corrigir com <code>join fetch</code>/<code>@EntityGraph</code>/<i>batch size</i>.</li>
+      <li><b>EAGER em tudo</b> traz o grafo inteiro e piora o desempenho, e <code>join fetch</code> de coleção com paginação gera paginação em memória (<code>HHH000104</code>).</li>
+    </ul>
+    <h3>Transações (<code>@Transactional</code>)</h3>
+    <ul>
+      <li>Implementado por <b>proxy</b>: chamar método <code>@Transactional</code> de <b>dentro da mesma classe</b> (<i>self-invocation</i>) <b>não</b> abre transação. Método <code>private</code>/<code>final</code> também não funciona.</li>
+      <li><b>Rollback por padrão só em <code>RuntimeException</code>/<code>Error</code></b>; exceção <i>checked</i> não faz rollback, a menos que use <code>rollbackFor</code>.</li>
+      <li>Propagação: <code>REQUIRED</code> (padrão, junta-se à existente) × <code>REQUIRES_NEW</code> (nova, independente). <code>readOnly=true</code> é dica de otimização.</li>
+      <li>Colocar a transação no <b>serviço</b> (unidade de negócio), não no controller nem em cada repositório.</li>
+    </ul>
+    <h3>Spring Data JPA</h3>
+    <ul>
+      <li><code>JpaRepository&lt;T,ID&gt;</code>: CRUD pronto; <b>consultas derivadas</b> do nome (<code>findByStatusAndDataAfter</code>); <code>@Query</code> (JPQL ou nativa); <code>@Modifying</code> em update/delete em lote.</li>
+      <li><b>Paginação</b>: <code>Pageable</code> → <code>Page</code> (faz <code>count</code> extra) × <code>Slice</code> (sem count, mais barato). Sempre ordene para paginação ser determinística.</li>
+      <li>Projeções/DTO para trazer só as colunas necessárias.</li>
+    </ul>
+<pre><code>@Query("select p from Processo p join fetch p.itens where p.orgao.id = :id")
+List&lt;Processo&gt; buscarComItens(@Param("id") Long id);   // evita N+1</code></pre>
+  </article>
+
+  <article class="card topic" data-p="high" id="t-sql">
+    <div class="card-h"><h3>SQL e desempenho</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
+    <p class="why">Cebraspe cobra SQL com consulta escrita no item. Treine <b>ler a query e prever o resultado</b>.</p>
+    <div class="cols">
+      <div>
+        <h3>Consultas</h3>
+        <ul>
+          <li><b>JOIN</b>: <code>INNER</code> (só casados), <code>LEFT</code> (todos da esquerda, NULL onde não casa), <code>FULL</code>, <code>CROSS</code> (produto cartesiano).</li>
+          <li><b><code>WHERE</code></b> filtra linhas <i>antes</i> de agrupar; <b><code>HAVING</code></b> filtra grupos <i>depois</i> (usa agregados).</li>
+          <li><b>Subconsultas</b>: <code>IN</code>, <code>EXISTS</code> (costuma ser melhor com muitos dados), correlacionadas.</li>
+          <li><b>CTE</b> (<code>WITH ... AS</code>): organiza queries; recursiva para hierarquias.</li>
+          <li>Funções de janela: <code>ROW_NUMBER()</code>, <code>RANK()</code>, <code>SUM() OVER (PARTITION BY ...)</code> (não colapsam linhas, ao contrário do <code>GROUP BY</code>).</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Controle e dados</h3>
+        <ul>
+          <li><b>DDL</b> (CREATE/ALTER/DROP) · <b>DML</b> (INSERT/UPDATE/DELETE/SELECT) · <b>DCL</b> (GRANT/REVOKE) · <b>TCL</b> (COMMIT/ROLLBACK).</li>
+          <li>Menor privilégio em <code>GRANT</code>; evitar conta da aplicação como dona do esquema.</li>
+          <li><b>ACID</b>; níveis de isolamento: <i>dirty read</i>, <i>non-repeatable read</i>, <i>phantom</i>; <b>deadlock</b> no banco.</li>
+        </ul>
+      </div>
+    </div>
+    <h3>NULL e duplicações (pegadinhas do tema)</h3>
+    <ul>
+      <li><code>NULL</code> = desconhecido; <code>= NULL</code> nunca é verdadeiro, use <code>IS NULL</code>. Lógica de <b>três valores</b>.</li>
+      <li><b><code>COUNT(*)</code></b> conta linhas; <b><code>COUNT(coluna)</code></b> ignora NULL; <code>SUM/AVG</code> ignoram NULL.</li>
+      <li><b><code>NOT IN</code> com NULL na lista retorna vazio</b>, por isso prefira <code>NOT EXISTS</code>.</li>
+      <li>Colunas NULL em <code>JOIN</code> não casam entre si; <code>UNION</code> remove duplicatas × <code>UNION ALL</code> não (e é mais rápido). JOIN em chave não única multiplica linhas (duplicação).</li>
+    </ul>
+    <h3>Índices e planos de execução</h3>
+    <ul>
+      <li>Índice <b>B-tree</b> acelera leitura (filtro, junção, ordenação) mas <b>custa escrita e espaço</b>.</li>
+      <li><b>Índice composto</b>: vale a regra do <b>prefixo mais à esquerda</b>.</li>
+      <li>Função na coluna <b>desativa</b> o índice (<code>WHERE YEAR(data)=2026</code>, <code>LIKE '%abc'</code>): condições “não sargáveis”. Use faixa: <code>data &gt;= '2026-01-01' AND data &lt; '2027-01-01'</code>.</li>
+      <li>Baixa seletividade (ex.: flag S/N) = índice pouco útil. <i>Covering index</i> evita ir à tabela.</li>
+      <li><code>EXPLAIN</code>: <i>seq scan</i> × <i>index scan</i>; estatísticas desatualizadas levam a planos ruins; <code>SELECT *</code> e consultas em loop (N+1) são vilões da aplicação.</li>
+    </ul>
+<pre><code>-- Quem NÃO tem pagamento? (seguro com NULL)
+SELECT c.id FROM contrato c
+WHERE NOT EXISTS (SELECT 1 FROM pagamento p WHERE p.contrato_id = c.id);
+
+WITH ranking AS (
+  SELECT orgao, valor, ROW_NUMBER() OVER (PARTITION BY orgao ORDER BY valor DESC) rn
+  FROM despesa)
+SELECT * FROM ranking WHERE rn = 1;   -- maior despesa por órgão</code></pre>
+  </article>
+
+  <article class="card topic" data-p="high" id="t-batch">
+    <div class="card-h"><h3>Spring Batch</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
+    <p class="why">Seis subitens só dele (3.6–3.9). É raro um edital detalhar tanto uma biblioteca; espere perguntas conceituais sobre reinício e reprocessamento.</p>
+    <div class="cols">
+      <div>
+        <h3>Estrutura</h3>
+        <ul>
+          <li><b>Job</b> contém um ou mais <b>Steps</b>.</li>
+          <li>Step de <b>chunk</b>: <code>ItemReader</code> → <code>ItemProcessor</code> → <code>ItemWriter</code>. Lê item a item, processa, acumula e <b>grava em bloco</b> (<i>chunk size</i> = <b>intervalo de commit</b>: 1 transação por chunk).</li>
+          <li>Step <b>Tasklet</b>: uma tarefa simples (limpar diretório, etc.).</li>
+          <li>Processador devolvendo <code>null</code> <b>filtra</b> o item (não vai ao writer).</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Estado e reinício</h3>
+        <ul>
+          <li><b>JobRepository</b> persiste metadados: <code>JobInstance</code> (job + <b>JobParameters</b> de identificação), <code>JobExecution</code> (cada tentativa), <code>StepExecution</code>.</li>
+          <li>Mesmos parâmetros de um job <b>FAILED</b> = <b>reinício</b> do ponto da falha; de um job <b>COMPLETED</b> = erro (instância já concluída), a menos que mude parâmetro.</li>
+          <li>Reader <b>com estado</b> (guarda posição no <code>ExecutionContext</code>) permite retomar; reader sem estado reprocessa do início.</li>
+        </ul>
+      </div>
+    </div>
+    <ul>
+      <li><b>Tolerância a falhas</b>: <code>skip</code> (ignora e segue, com limite), <code>retry</code> (tenta de novo para falhas transitórias), <i>listeners</i>.</li>
+      <li><b>Evitar perda e duplicação</b>: commit por chunk + estado persistido; <b>writer idempotente</b> (<i>upsert</i>/chave única), pois o chunk que falhou é desfeito mas efeitos externos (ex.: e-mail, API) não.</li>
+      <li>Ler de arquivo/banco com <b>paginação ou cursor</b> para não estourar memória; processar <b>incremental</b> por marca d’água.</li>
+    </ul>
+  </article>
+
+  <article class="card topic" data-p="high" id="t-priv">
+    <div class="card-h"><h3>Privacidade e segurança de dados (LGPD)</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
+    <p class="why">Item 4 do bloco, repetido em transparência (complementares). Pergunta típica: “qual técnica/princípio se aplica aqui?”.</p>
+    <ul>
+      <li><b>Princípios (Lei 13.709/2018, art. 6º)</b>: finalidade, adequação, <b>necessidade (minimização)</b>, livre acesso, qualidade, transparência, <b>segurança</b>, prevenção, não discriminação, responsabilização.</li>
+      <li><b>Dado pessoal</b> (identifica ou pode identificar) × <b>sensível</b> (saúde, origem racial, religião, opinião política, biometria, vida sexual etc.) × <b>anonimizado</b> (não identifica; <b>fora</b> da LGPD se irreversível).</li>
+      <li><b>Pseudonimização ≠ anonimização</b>: troca identificadores por códigos, mas com a chave dá para reidentificar, então <b>continua sendo dado pessoal</b>. <b>Risco de reidentificação</b> por cruzamento de bases (quase-identificadores: CEP + nascimento + sexo).</li>
+      <li><b>Criptografia</b>: <b>em trânsito</b> (TLS) e <b>em repouso</b> (AES, disco/campo/banco); gestão de chaves separada dos dados; <b>hash</b> não é criptografia (é irreversível; para senha, usar hash lento com salt).</li>
+      <li><b>Minimização, finalidade, acesso e segregação</b>: coletar só o necessário, usar para o fim declarado, acesso por necessidade (<i>need to know</i>), separar dados identificáveis dos demais.</li>
+      <li><b>Retenção e descarte</b>: prazo definido, eliminação segura, e <b>cópias</b> (backups, logs, ambientes de teste, planilhas) também entram.</li>
+      <li><b>Compartilhamento/publicação</b>: base legal, tarjamento, agregação, dados abertos <b>sem</b> dados pessoais; compatibilizar com a Lei de Acesso à Informação.</li>
+      <li><b>Privacy by design/default</b> (desde a concepção): privacidade como requisito da arquitetura, configuração mais protetiva por padrão, RIPD (relatório de impacto).</li>
+      <li>Não logar dado pessoal/sensível; não usar produção real em testes sem mascaramento.</li>
+    </ul>
+  </article>
+
+  <article class="card topic" data-p="mid" id="t-etl">
+    <div class="card-h"><h3>Fluxos de dados, ETL/ELT e formatos</h3><span class="badge b-mid">MÉDIA</span><label class="chk"><input type="checkbox"> estudado</label></div>
+    <p class="why">Itens 3.1–3.5: ingestão, transformação, lote × fluxo, completo × incremental, formatos e repetição segura.</p>
+    <ul>
+      <li><b>ETL</b>: transforma <i>antes</i> de carregar (em área de staging). <b>ELT</b>: carrega bruto e transforma <i>dentro</i> do destino (comum em data lake/warehouse na nuvem).</li>
+      <li><b>Lote</b> (batch: janelas, alto volume, latência maior) × <b>fluxo</b> (stream: evento a evento, baixa latência).</li>
+      <li><b>Carga completa</b> (recarrega tudo; simples e cara) × <b>incremental</b> (só o novo/alterado: marca d’água por data/ID, ou <b>CDC</b>; atenção a exclusões e atrasos).</li>
+      <li><b>Formatos</b>: <b>CSV</b> (simples, sem tipos/esquema, problemas com delimitador e codificação) · <b>JSON</b> (aninhado, legível, verboso) · <b>XML</b> (esquema XSD, namespaces, verboso) · <b>Parquet</b> (<b>colunar</b>, comprimido, tipado, ótimo para análise; leitura seletiva de colunas).</li>
+      <li><b>Qualidade e rastreabilidade</b>: validar esquema, nulos, duplicidades; <b>linhagem</b> (de onde veio); <b>conciliação</b> (contagem/soma origem × destino).</li>
+      <li><b>Reprocessamento seguro</b>: operações idempotentes (<i>upsert</i>, chave natural), carga em tabela temporária + <i>swap</i>, registro do que já foi processado.</li>
+    </ul>
+  </article>
+
+  <article class="card topic" data-p="low" id="t-model">
+    <div class="card-h"><h3>Modelagem, NoSQL, cache e busca</h3><span class="badge b-low">MÉDIA/BAIXA</span><label class="chk"><input type="checkbox"> estudado</label></div>
+    <p class="why">Item 1 do bloco. Conceitos básicos resolvem a maioria.</p>
+    <ul>
+      <li><b>Normalização</b>: 1FN (valores atômicos) → 2FN (sem dependência parcial da chave) → 3FN (sem dependência transitiva). Reduz redundância e anomalias; <b>desnormalizar</b> conscientemente para leitura/desempenho.</li>
+      <li><b>Integridade</b>: PK, FK (referencial), UNIQUE, NOT NULL, CHECK.</li>
+      <li><b>Escolha do armazenamento conforme o uso</b>: relacional (transações, integridade, consultas ad hoc) · <b>documental</b> (MongoDB: dados aninhados, esquema flexível) · <b>chave-valor</b> (Redis: acesso por chave, cache, sessão) · <b>vetorial</b> (busca por similaridade de embeddings).</li>
+      <li><b>Cache</b>: <i>cache-aside</i>, TTL, <b>invalidação</b> (o difícil), risco de dado desatualizado; cache nunca é fonte da verdade.</li>
+      <li><b>Busca textual</b> (Elasticsearch/OpenSearch): <b>índice invertido</b>, relevância, <i>stemming</i>; complementa o banco, não o substitui.</li>
+      <li>Evolução de esquemas: <i>migrations</i> versionadas (Flyway/Liquibase), mudanças compatíveis em duas fases.</li>
+    </ul>
+  </article>
+</section>
+
+<!-- ============ SEGURANÇA & ENTREGA ============ -->
+<section id="seg">
+  <h2><span class="n">06</span>Desenvolvimento Seguro, Qualidade e Gestão da Entrega</h2>
+  <p class="sub">Segurança de aplicação e testes são rentáveis. Contratação e gestão rendem itens conceituais “fáceis”.</p>
+
+  <article class="card topic" data-p="high" id="t-owasp">
+    <div class="card-h"><h3>Segurança de aplicações (OWASP)</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
+    <p class="why">Ameaças, validação de entrada, controle de acesso, segredos, dependências, testes autorizados, vazamentos e tratamento de falhas (inclusive com IA).</p>
+    <div class="cols">
+      <div>
+        <h3>OWASP Top 10 (essencial)</h3>
+        <ul>
+          <li><b>Broken Access Control</b> (IDOR, falta de checagem no servidor).</li>
+          <li><b>Cryptographic Failures</b> (dados sem TLS, algoritmo fraco).</li>
+          <li><b>Injection</b> (SQL, comando, LDAP) e <b>XSS</b>.</li>
+          <li><b>Insecure Design</b> · <b>Security Misconfiguration</b> (padrões, mensagens de erro verbosas, S3 aberto).</li>
+          <li><b>Vulnerable/Outdated Components</b> · <b>Auth Failures</b> · <b>Integrity Failures</b> (cadeia de suprimentos).</li>
+          <li><b>Logging/Monitoring Failures</b> · <b>SSRF</b>.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Defesas</h3>
+        <ul>
+          <li><b>SQL injection</b>: <b>consultas parametrizadas</b> (<code>PreparedStatement</code>, JPA <code>:param</code>), nunca concatenar. Validar entrada é complemento, não substituto.</li>
+          <li><b>XSS</b>: <b>codificar a saída</b> conforme o contexto, CSP, evitar <code>innerHTML</code>/<code>v-html</code>.</li>
+          <li><b>CSRF</b>: token anti-CSRF, <code>SameSite</code>.</li>
+          <li>Validar no <b>servidor</b> (a validação do front é só UX); <i>allowlist</i> &gt; <i>denylist</i>; limitar tamanho, tipo (upload!).</li>
+        </ul>
+      </div>
+    </div>
+    <ul>
+      <li><b>Segredos</b>: nunca no repositório/imagem/log; usar <i>vault</i>/variáveis de ambiente; rotação; <i>secret scanning</i>. Segredo commitado = considerar <b>comprometido</b> (revogar, não só apagar).</li>
+      <li><b>Dependências</b>: SCA, <b>SBOM</b>, atualização, fixar versões, atenção a pacotes maliciosos (<i>typosquatting</i>).</li>
+      <li><b>Testes de segurança autorizados</b>: SAST (código), DAST (aplicação rodando), SCA, <i>pentest</i> <b>com autorização escrita e escopo</b>.</li>
+      <li><b>Prevenção de vazamentos</b>: mensagens de erro genéricas ao usuário (detalhes só no log), sem <i>stack trace</i> exposto, minimizar dados em respostas de API.</li>
+      <li><b>Tratamento de incidentes</b>: registros (logs) íntegros e sem dado sensível, <b>preservar evidências</b> (cadeia de custódia, não alterar), conter → erradicar → recuperar, comunicar.</li>
+      <li><b>Com IA</b>: injeção de prompt, vazamento via contexto/saída, logs que guardam prompts com dados pessoais, ferramentas com permissão excessiva.</li>
+    </ul>
+  </article>
+
+  <article class="card topic" data-p="high" id="t-test">
+    <div class="card-h"><h3>Testes e qualidade</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
+    <p class="why">Item 2 do bloco, direto e conceitual. Atenção aos “limites das métricas”.</p>
+    <table>
+      <tr><th>Tipo</th><th>O que verifica</th><th>Característica</th></tr>
+      <tr><td>Unitário</td><td>Uma unidade isolada (JUnit + Mockito)</td><td>Rápido, muitos, dependências substituídas por <i>mocks/stubs</i></td></tr>
+      <tr><td>Integração</td><td>Módulos juntos (serviço + banco, ex.: Testcontainers)</td><td>Mais lento, menos numerosos</td></tr>
+      <tr><td>Contrato</td><td>Acordo de API entre consumidor e provedor (ex.: Pact)</td><td>Detecta quebra de compatibilidade sem subir tudo</td></tr>
+      <tr><td>Aceitação</td><td>Atende ao critério de aceitação do usuário (BDD: dado/quando/então)</td><td>Valida o requisito, não o código</td></tr>
+    </table>
+    <ul>
+      <li><b>Pirâmide de testes</b>: base grande de unitários, meio de integração, topo pequeno de ponta a ponta (E2E, lentos e frágeis).</li>
+      <li><b>Análise estática</b> (SonarQube, linters): acha <i>code smells</i>, bugs e vulnerabilidades sem executar; gera falso positivo.</li>
+      <li><b>Cobertura</b> mede <b>linhas executadas, não qualidade das asserções</b>. 100% de cobertura não garante ausência de bugs (teste sem <code>assert</code> cobre e não valida). Meta de métrica vira alvo e é manipulada (Lei de Goodhart).</li>
+      <li><b>Revisão de código</b> (<i>pull request</i>): acha defeitos de design/segurança, difunde conhecimento.</li>
+      <li><b>Automação</b>: rodar na CI; <b>dados de teste</b> controlados, determinísticos e anonimizados, sem dado real de produção.</li>
+      <li>Testes <b>não funcionais</b>: segurança, desempenho/carga, acessibilidade; testes <i>flaky</i> (instáveis) minam a confiança.</li>
+    </ul>
+  </article>
+
+  <article class="card topic" data-p="high" id="t-cicd">
+    <div class="card-h"><h3>Entrega e operação: CI/CD e DevSecOps</h3><span class="badge b-high">ALTA</span><label class="chk"><input type="checkbox"> estudado</label></div>
+    <p class="why">Item 3 do bloco.</p>
+    <ul>
+      <li><b>Integração contínua (CI)</b>: integrar com frequência no tronco, com build + testes automáticos a cada <i>commit</i>. <b>Entrega contínua</b>: sempre pronto para produção, com <b>aprovação manual</b> para implantar. <b>Implantação contínua</b>: vai para produção <b>automaticamente</b>.</li>
+      <li><b>DevSecOps</b>: segurança <b>em todo o ciclo</b> (<i>shift left</i>): SAST, SCA, <i>secret scanning</i>, DAST, varredura de imagens na pipeline.</li>
+      <li><b>Cadeia de suprimentos</b>: dependências verificadas, versões fixadas (<i>lock files</i>), artefatos assinados, <b>build reprodutível</b>, repositório interno de artefatos, SBOM.</li>
+      <li><b>Automação de build/teste/implantação</b>: pipeline como código; o <b>mesmo artefato</b> promovido entre ambientes (<i>build once, deploy many</i>); IaC.</li>
+      <li><b>Ambientes segregados</b> (dev/homologação/produção): configuração externa, <b>dados e credenciais distintos</b>, sem dado real em dev.</li>
+      <li><b>Mudanças e reversão</b>: <i>rolling</i>, <b>blue-green</b> (dois ambientes, troca de tráfego), <b>canary</b> (pequena parcela primeiro), <i>feature flags</i>; <b>plano de rollback</b>; migrações de banco compatíveis com a versão anterior.</li>
+      <li><b>Observabilidade</b> para detectar regressão após o deploy; <b>continuidade durante entregas e incidentes</b>: janela, comunicação, <i>post-mortem</i> sem culpados.</li>
+      <li>Versionamento: Git, <i>trunk-based</i> × GitFlow, versionamento semântico (MAJOR.MINOR.PATCH).</li>
+    </ul>
+  </article>
+
+  <article class="card topic" data-p="mid" id="t-agil">
+    <div class="card-h"><h3>Gestão de produtos digitais, Scrum, Kanban e governança</h3><span class="badge b-mid">MÉDIA</span><label class="chk"><input type="checkbox"> estudado</label></div>
+    <p class="why">Item 4. Conceitos de gestão com o “sabor CGU”: PDTIC, transformação digital e dados abertos.</p>
+    <div class="cols">
+      <div>
+        <h3>Scrum</h3>
+        <ul>
+          <li><b>Papéis</b>: <i>Product Owner</i> (maximiza valor, dono do <b>Product Backlog</b> e prioridade), <i>Scrum Master</i> (remove impedimentos, garante o processo), <i>Developers</i> (autogerenciados; decidem <b>como</b>).</li>
+          <li><b>Eventos</b>: Sprint (≤ 1 mês), Planejamento, Daily (15 min), Revisão, Retrospectiva.</li>
+          <li><b>Artefatos e compromissos</b>: Product Backlog → <b>Meta do Produto</b>; Sprint Backlog → <b>Meta da Sprint</b>; Incremento → <b>Definição de Pronto (DoD)</b>.</li>
+          <li><b>Critérios de aceitação</b> (por item) × <b>DoD</b> (comum a todos).</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Kanban e produto</h3>
+        <ul>
+          <li><b>Kanban</b>: visualizar fluxo, <b>limitar WIP</b>, gerenciar fluxo (<i>lead time</i>, <i>cycle time</i>, vazão); fluxo contínuo, sem sprint obrigatória.</li>
+          <li><b>Descoberta de necessidades</b> (entender o problema <i>antes</i> de construir), MVP, hipóteses, ciclo de vida do produto (descoberta → entrega → evolução → descontinuação).</li>
+          <li><b>Priorização</b>: valor × esforço, <b>MoSCoW</b>, WSJF. <b>Indicadores de resultado</b> (<i>outcome</i>: o problema melhorou?) × <b>produto de entrega</b> (<i>output</i>: entregamos a funcionalidade?).</li>
+        </ul>
+      </div>
+    </div>
+    <ul>
+      <li><b>PDTIC</b> (Plano Diretor de TIC): planejamento de TI do órgão, alinhado à estratégia institucional; base para priorização e contratações. <b>Plano de Transformação Digital</b> (serviços digitais, Gov.br) e <b>Plano de Dados Abertos (PDA)</b>: publicar dados reutilizáveis em formato aberto e legível por máquina, <b>respeitando a proteção de dados pessoais</b>. Esses planos devem aparecer como <b>requisitos</b> de produtos e integrações.</li>
+      <li><b>Riscos, responsabilidades e evidências de efetividade</b>: risco → controle → evidência de que o controle funciona (conversa direta com a auditoria).</li>
+    </ul>
+  </article>
+
+  <article class="card topic" data-p="mid" id="t-contrat">
+    <div class="card-h"><h3>Contratação e fiscalização de soluções de TI</h3><span class="badge b-mid">MÉDIA</span><label class="chk"><input type="checkbox"> estudado</label></div>
+    <p class="why">Item 5: ETP, TR, comparação “fazer × comprar × compartilhar”, custo total, SLA, fiscalização, propriedade intelectual e plano de saída. Como a prova é de <b>auditor</b>, a ótica é de controle.</p>
+    <ul>
+      <li><b>Sequência</b>: necessidade → <b>ETP (Estudo Técnico Preliminar)</b> (justifica a necessidade, compara alternativas, estima custo, avalia viabilidade) → <b>Termo de Referência</b> (especifica o objeto, requisitos, critérios de aceite, SLA, obrigações) → licitação → contrato → <b>fiscalização</b> → pagamento.</li>
+      <li><b>Alternativas</b>: desenvolvimento próprio × contratação (fábrica de software, serviço) × <b>compartilhamento</b> (reuso de solução de outro órgão, software público). Considerar capacidade da equipe, custo de manutenção, risco, prazo, <b>dependência</b>.</li>
+      <li><b>Custo Total de Propriedade (TCO)</b>: aquisição + implantação + operação + manutenção + treinamento + <b>saída</b>, e não só o preço da licença.</li>
+      <li><b>Pesquisa de preços</b>: múltiplas fontes (contratos similares, painel de preços, fornecedores), evitando preço de uma fonte só e cuidado com sobrepreço.</li>
+      <li><b>Níveis de serviço (SLA/ANS)</b> mensuráveis, com <b>glosa</b> proporcional ao descumprimento; <b>critérios de aceitação</b> objetivos; pagamento vinculado a <b>entregas verificadas</b> (por resultado), não por horas ociosas.</li>
+      <li><b>Fiscalização</b>: separar gestor, fiscais técnico/administrativo/requisitante; <b>atestar só o que foi verificado</b>; pagamento só após aceite.</li>
+      <li><b>Propriedade intelectual</b>: no desenvolvimento contratado, prever <b>cessão dos direitos</b>, entrega do <b>código-fonte</b> e documentação (Lei 9.609/1998 – software); <b>portabilidade</b> de dados, acesso aos dados e formatos abertos, <b>evitar <i>lock-in</i></b>, e <b>plano de saída/transição</b> (transferência de conhecimento).</li>
+      <li>Base normativa para revisar: <b>Lei 14.133/2021</b> e normas de contratação de soluções de TIC do governo federal (SGD).</li>
+    </ul>
+  </article>
+</section>
+
+<!-- ============ P1 & P2 ============ -->
+<section id="p1p2">
+  <h2><span class="n">07</span>P1 e P2: o que não dá para ignorar</h2>
+  <p class="sub">80 itens que valem 80 pontos e eliminam. Conteúdo comum aos cargos da CGU, e não é técnico de TI.</p>
+
+  <div class="card">
+    <div class="card-h"><h3>P2 — Complementares (mín. 12 de 40)</h3></div>
+    <ul>
+      <li><b>Governança, riscos e integridade</b>: governança × gestão × controle; risco, causa, consequência, controle; <b>segregação de funções</b>; <b>três linhas</b> (gestão operacional → gestão de riscos/controle → auditoria interna); programas de integridade (pública e privada); <b>existência documental ≠ implementação ≠ efetividade</b>.</li>
+      <li><b>Transparência e ouvidoria</b>: LAI (Lei 12.527/2011): transparência ativa/passiva, <b>publicidade como regra, sigilo exceção</b>, informação classificada, acesso parcial, recursos; <b>LAI × LGPD</b> (tarjar dados pessoais); ouvidoria: acolher ≠ apurar ≠ responsabilizar; proteção do denunciante; Portal da Transparência, dados abertos.</li>
+      <li><b>Direito público e controle</b>: competência, finalidade, motivação, proporcionalidade; contraditório e ampla defesa; <b>controle interno (CGU) × externo (Congresso com apoio do TCU) × social</b>; <b>indício ≠ falha de gestão ≠ irregularidade ≠ responsabilidade</b>; PAD (Lei 8.112/90), <b>PAR</b> e <b>acordo de leniência</b> (Lei 12.846/2013).</li>
+      <li><b>Evidências, dados e IA</b>: dado × evidência × interpretação; correlação ≠ causalidade; falsos positivos/negativos; <b>subnotificação</b>; IA com revisão humana, viés, rastreabilidade e contestação.</li>
+      <li><b>Auditoria governamental</b>: avaliação, consultoria, apuração; independência e objetividade; <b>planejamento → execução → comunicação → monitoramento</b>; evidência <b>suficiente, adequada e confiável</b>; achado (critério, condição, causa, efeito); recomendação ligada à causa.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><h3>P1 — Básicos (mín. 8 de 40)</h3></div>
+    <ul>
+      <li><b>Estado, democracia e ciência política</b>: legitimidade, representação, federalismo, capacidades estatais; <b>corrupção</b> (distinguir de falha de gestão, conflito de interesses, nepotismo, clientelismo, captura); problema <b>agente-principal</b>; Estado e desenvolvimento (papel das estatais).</li>
+      <li><b>Sociedade brasileira</b>: desigualdades, diversidade, interseccionalidade, cidadania, indicadores sociais.</li>
+      <li><b>Ética pública</b>: imparcialidade, probidade; <b>Lei 12.813/2013 (conflito de interesses, arts. 3º a 5º, 8º e 10)</b>; <b>Lei 9.784/1999, arts. 18 a 21 (impedimento e suspeição)</b>; assédio e discriminação.</li>
+      <li><b>Administração pública e políticas públicas</b>: administração direta/indireta, descentralização × desconcentração; ciclo de políticas (agenda → formulação → implementação → avaliação); <b>PPA, LDO e LOA</b>; transformação digital, IA na administração.</li>
+    </ul>
+    <p class="note">Como a P1 e a P2 têm nota mínima de 8 e 12 (bem baixa), a meta racional é <b>garantir o piso</b> sem sacrificar a P3, que pesa 180 pontos. Ótimo uso do tempo: resolver questões Cebraspe anteriores de CGU, CGE e TCU nesses temas.</p>
+  </div>
+</section>
+
+<!-- ============ DISCURSIVA ============ -->
+<section id="discursiva">
+  <h2><span class="n">08</span>Prova discursiva</h2>
+  <p class="sub">Vale tanto quanto toda a parte objetiva na nota final. Só é corrigida para os mais bem colocados nas objetivas.</p>
+
+  <div class="card">
+    <ul>
+      <li><b>Questão 1 (30 pts · até 30 linhas)</b>: conhecimentos complementares (governança, integridade, transparência, auditoria).</li>
+      <li><b>Questão 2 (70 pts · até 60 linhas)</b>: <b>situação-problema</b> de TI. Esperam diagnóstico, decisão e justificativa técnica.</li>
+      <li>Texto <b>dissertativo</b>, coerente e coeso, em norma culta. Nota = conteúdo − penalidade por erros (<code>NQ1 = NC − 6×NE ÷ TL</code>). <b>Cada erro de português desconta; escreva o texto inteiro, mas sem ultrapassar o limite</b> (o excedente é desconsiderado).</li>
+      <li>Aprovação na discursiva: <b>NFPD ≥ 50</b> de 100. Manuscrito, caneta preta, sem identificação.</li>
+    </ul>
+    <h3>Roteiro para a situação-problema (60 linhas)</h3>
+    <ol>
+      <li><b>Contextualize</b> o problema e o risco (1–2 frases).</li>
+      <li><b>Diagnostique</b>: causas prováveis e o que verificar (logs, métricas, queries, permissões).</li>
+      <li><b>Proponha a solução técnica</b>, com a <b>tecnologia certa</b> (ex.: <code>join fetch</code> contra N+1; Outbox + consumidor idempotente; PKCE; parametrização; chunk + restart no Batch).</li>
+      <li><b>Compare alternativas e trade-offs</b> (custo, risco, prazo, segurança, desempenho).</li>
+      <li><b>Controles e evidências</b>: testes, observabilidade, rollback, LGPD, segregação de funções.</li>
+      <li><b>Conclua</b> com a recomendação priorizada.</li>
+    </ol>
+    <h3>Cenários prováveis para treinar</h3>
+    <ul>
+      <li>API com falha de controle de acesso (IDOR, permissões excessivas) e como corrigir/testar.</li>
+      <li>Lentidão por N+1, índice ausente ou consulta não sargável.</li>
+      <li>Job batch que duplica ou perde registros após falha e reinício.</li>
+      <li>Integração por mensageria com duplicidade e consistência (Outbox/Saga/idempotência).</li>
+      <li>Uso de IA/RAG com vazamento de dados ou prompt injection.</li>
+      <li>Escolha entre monolito × microsserviços, ou desenvolver × contratar × compartilhar, com ótica de risco e custo.</li>
+      <li>Vazamento de dado pessoal: minimização, pseudonimização, retenção, resposta a incidente.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    Resumo de estudo elaborado a partir do Edital nº 1 – CGU – AFFC, de 8 de outubro de 2026 (item 15.2). Material de apoio <b>não oficial</b>: as prioridades são estimativas e as referências normativas devem ser conferidas nas fontes. Confira sempre datas e regras no edital e no site da banca (Cebraspe).
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* tema */
+  var root=document.documentElement, KEY="cgu-theme";
+  try{var t=localStorage.getItem(KEY); if(t) root.setAttribute("data-theme",t);}catch(e){}
+  document.getElementById("theme").addEventListener("click",function(){
+    var dark=root.getAttribute("data-theme")==="dark" ||
+      (!root.getAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches);
+    var next=dark?"light":"dark"; root.setAttribute("data-theme",next);
+    try{localStorage.setItem(KEY,next);}catch(e){}
+  });
+
+  /* contagem regressiva */
+  var exam=new Date(2026,11,13), today=new Date(); today.setHours(0,0,0,0);
+  var d=Math.round((exam-today)/864e5);
+  document.getElementById("days").textContent = d>0 ? d : (d===0?"Hoje!":"—");
+
+  /* progresso */
+  var PK="cgu-done", done={};
+  try{done=JSON.parse(localStorage.getItem(PK)||"{}");}catch(e){}
+  var topics=[].slice.call(document.querySelectorAll(".topic"));
+  function save(){try{localStorage.setItem(PK,JSON.stringify(done));}catch(e){}}
+  function paint(){
+    var n=0;
+    topics.forEach(function(c){
+      var on=!!done[c.id]; c.classList.toggle("done",on);
+      c.querySelector("input").checked=on; if(on)n++;
+    });
+    document.getElementById("fill").style.width=(topics.length?n/topics.length*100:0)+"%";
+    document.getElementById("ptxt").textContent=n+" de "+topics.length+" tópicos estudados";
+    applyFilter();
+  }
+  topics.forEach(function(c){
+    c.querySelector("input").addEventListener("change",function(e){
+      if(e.target.checked) done[c.id]=1; else delete done[c.id];
+      save(); paint();
+    });
+  });
+  document.getElementById("reset").addEventListener("click",function(){
+    if(confirm("Zerar todo o progresso de estudo?")){done={};save();paint();}
+  });
+
+  /* filtros */
+  var filter="all";
+  function applyFilter(){
+    topics.forEach(function(c){
+      var show = filter==="all" || (filter==="todo" ? !done[c.id] : c.dataset.p===filter);
+      c.style.display = show ? "" : "none";
+    });
+  }
+  document.getElementById("filters").addEventListener("click",function(e){
+    var b=e.target.closest("button"); if(!b)return;
+    filter=b.dataset.f;
+    [].forEach.call(this.children,function(x){x.classList.toggle("on",x===b);});
+    applyFilter();
+  });
+
+  /* navegação ativa */
+  var links=[].slice.call(document.querySelectorAll("#nav a"));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute("href"));});
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(en){
+        if(en.isIntersecting){
+          links.forEach(function(a){a.classList.toggle("on",a.getAttribute("href")==="#"+en.target.id);});
+          var nav=document.getElementById("nav"), on=nav.querySelector("a.on");
+          if(on) nav.scrollTo({left:on.offsetLeft-nav.clientWidth/2+on.offsetWidth/2,behavior:"smooth"});
+        }
+      });
+    },{rootMargin:"-30% 0px -60% 0px"});
+    secs.forEach(function(s){if(s)io.observe(s);});
+  }
+  paint();
+})();
+</script>
+</body>
+</html>
